@@ -5,15 +5,27 @@ import '../../../config/app_config.dart';
 import '../models/response_message_model.dart';
 
 class SupabaseApiHelper {
-  // Build headers with auth token
-  static Future<Map<String, String>> httpHeader() async {
+  static Future<Map<String, String>> httpHeader(String? route) async {
     final prefs = await SharedPreferences.getInstance();
+
+    // Default schema
+    String schema = 'public';
+
+    if (route != null && route.trim().isNotEmpty) {
+      final parts = route.trim().split('.');
+      if (parts.isNotEmpty && parts.first.isNotEmpty) {
+        schema = parts.first;
+      }
+    }
+
     final accessToken = prefs.getString('access_token');
+
     return {
       'Content-Type': 'application/json',
-      'Content-Profile': 'seminar',
+      'Content-Profile': schema, // Supabase schema
       'apikey': appConfig.localKey,
-      if (accessToken != null) 'access_token': accessToken,
+      if (accessToken != null && accessToken.isNotEmpty)
+        'access_token': accessToken,
     };
   }
 
@@ -23,26 +35,8 @@ class SupabaseApiHelper {
     try {
       return await call();
     } catch (e) {
-      print('API Error: $e');
-
       return ResponseMessageModel.error(message: e.toString());
     }
-  }
-
-  // GET request
-  static Future<dynamic> get(
-    String route, {
-    Map<String, dynamic>? params,
-  }) async {
-    final headers = await httpHeader();
-    Uri uri = Uri.parse('${appConfig.apiBaseUrl}/rest/v1/rpc/$route');
-    if (params != null && params.isNotEmpty) {
-      uri = uri.replace(
-        queryParameters: params.map((k, v) => MapEntry(k, v.toString())),
-      );
-    }
-    final response = await http.get(uri, headers: headers);
-    return jsonDecode(response.body);
   }
 
   // POST request
@@ -50,29 +44,16 @@ class SupabaseApiHelper {
     String route,
     Map<String, dynamic>? data,
   ) async {
-    final headers = await httpHeader();
-    Uri uri = Uri.parse('${appConfig.apiBaseUrl}/rest/v1/rpc/$route');
+    final headers = await httpHeader(route);
+
+    String functionName = route.trim().split('.').last;
+
+    Uri uri = Uri.parse('${appConfig.apiBaseUrl}/rest/v1/rpc/$functionName');
     final response = await http.post(
       uri,
       headers: headers,
       body: jsonEncode(data),
     );
     return ResponseMessageModel.fromJson(jsonDecode(response.body));
-  }
-
-  // DELETE request
-  static Future<dynamic> delete(
-    String route, {
-    Map<String, dynamic>? params,
-  }) async {
-    final headers = await httpHeader();
-    Uri uri = Uri.parse('${appConfig.apiBaseUrl}/rest/v1/rpc/$route');
-    if (params != null && params.isNotEmpty) {
-      uri = uri.replace(
-        queryParameters: params.map((k, v) => MapEntry(k, v.toString())),
-      );
-    }
-    final response = await http.delete(uri, headers: headers);
-    return jsonDecode(response.body);
   }
 }
