@@ -1,18 +1,32 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../providers/service_providers.dart';
+import '../../common/services/navigation_service.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _FAILoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _FAILoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen>
+    with TickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
   bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _emailController.text = "pratul@gmail.com";
+    _passwordController.text = "Pratul@123";
+  }
 
   @override
   void dispose() {
@@ -22,22 +36,65 @@ class _FAILoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _handleLogin() async {
-    if (_formKey.currentState!.validate()) {
-      setState(() => _isLoading = true);
+    if (!_formKey.currentState!.validate()) return;
 
-      // Simulate login delay
-      await Future.delayed(const Duration(seconds: 2));
+    setState(() {
+      _isLoading = true;
+    });
 
-      setState(() => _isLoading = false);
+    try {
+      final authService = ref.read(authServiceProvider);
 
-      // Add your login logic here
+      // Call signIn which now returns both auth response and profile
+      final result = await authService.signIn(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+      );
+
+      // Handle successful login
+      if (result['is_success'] == true) {
+        final data = result['data'];
+        final profile = data[0];
+
+        if (data != null && profile != null) {
+          // Store profile in shared preferences
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString('user_profile', json.encode(profile));
+
+          // Fallback to a default dynamic screen if no mobile route specified
+          NavigationService.navigateTo('home', arguments: {'isHome': true});
+        } else {
+          // Fallback to a default dynamic screen if profile fetch failed
+          NavigationService.navigateTo('login', arguments: {'isHome': true});
+        }
+      } else {
+        // Fallback to a default dynamic screen if auth failed
+        NavigationService.navigateTo('login', arguments: {'isHome': true});
+      }
+    } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Login Successful!'),
-            backgroundColor: Color(0xFF4CAF50),
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Icons.error, color: Colors.white),
+                const SizedBox(width: 8),
+                Expanded(child: Text('Error: ${e.toString()}')),
+              ],
+            ),
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
         );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
       }
     }
   }

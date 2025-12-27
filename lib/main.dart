@@ -1,23 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mobile_app_tech_techie_seminar/features/event/screens/seminar_home_screen.dart';
-import 'package:mobile_app_tech_techie_seminar/features/user/screens/login_screen.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'auth_wrapper.dart';
+import 'config/app_config.dart';
+import 'features/common/services/navigation_service.dart';
+import 'firebase/firebase_options.dart';
+import 'firebase/notification_service.dart';
 
-void main() {
-  runApp(const ProviderScope(child: SeminarApp()));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  if (appConfig.serviceType == ServiceType.supabase) {
+    // Initialize Supabase
+    await Supabase.initialize(
+      url: appConfig.apiBaseUrl,
+      anonKey: appConfig.localKey,
+    );
+  }
+
+  // Request notification permissions and set up FCM
+  final notificationServices = NotificationServices();
+  notificationServices.requestNotificationPermission();
+  notificationServices.isTokenRefresh();
+
+  runApp(
+    ProviderScope(child: MyApp(notificationServices: notificationServices)),
+  );
 }
 
-class SeminarApp extends StatelessWidget {
-  const SeminarApp({super.key});
+class MyApp extends ConsumerWidget {
+  final NotificationServices notificationServices;
+  const MyApp({super.key, required this.notificationServices});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      title: 'Seminar',
+      title: appConfig.appName,
+      theme: ThemeData(useMaterial3: true),
+      navigatorKey: NavigationService.navigatorKey,
+      onGenerateRoute: NavigationService.onGenerateRoute,
+      home: AuthWrapper(notificationServices: notificationServices),
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.green, useMaterial3: true),
-      home: const SeminarHomeScreen(),
-      //home: LoginScreen(),
     );
   }
 }
