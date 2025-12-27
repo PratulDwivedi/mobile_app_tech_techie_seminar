@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../widgets/action_tiles_section.dart';
+import '../widgets/app_sidebar_drawer.dart';
 import '../widgets/bottom_nav_bar.dart';
 import '../widgets/feature_grid.dart';
 import '../widgets/gradient_header.dart';
@@ -15,10 +16,10 @@ class SeminarHomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      //color: const Color(0xFF111827), // Dark background
-      color:  Color(0xFF4CAF50) ,// Dark background
+      color: Color(0xFF4CAF50), // Dark background
       child: Scaffold(
-        backgroundColor: Colors.transparent, // Make scaffold transparent
+        drawer: const AppSidebarDrawer(),
+        backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Column(
             children: [

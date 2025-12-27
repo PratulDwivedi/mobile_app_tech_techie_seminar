@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mobile_app_tech_techie_seminar/features/event/providers/providers.dart';
+import 'package:mobile_app_tech_techie_seminar/features/event/providers/event_service_provider.dart';
 
 class SocialPostCard extends ConsumerWidget {
   const SocialPostCard({super.key});

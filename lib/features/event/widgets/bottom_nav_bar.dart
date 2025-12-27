@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../providers/providers.dart';
+import '../providers/event_service_provider.dart';
 
 class BottomNavBar extends ConsumerWidget {
   const BottomNavBar({super.key});

@@ -65,11 +65,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
           NavigationService.navigateTo('home', arguments: {'isHome': true});
         } else {
           // Fallback to a default dynamic screen if profile fetch failed
-          NavigationService.navigateTo('login', arguments: {'isHome': true});
+          NavigationService.navigateTo('login', arguments: {'isHome': false});
         }
       } else {
         // Fallback to a default dynamic screen if auth failed
-        NavigationService.navigateTo('login', arguments: {'isHome': true});
+        NavigationService.navigateTo('login', arguments: {'isHome': false});
       }
     } catch (e) {
       if (mounted) {
@@ -187,7 +187,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                             keyboardType: TextInputType.emailAddress,
                             style: const TextStyle(fontSize: 16),
                             decoration: InputDecoration(
-                              labelText: 'Email Address',
+                              labelText: 'Login ID',
                               hintText: 'Enter your email',
                               prefixIcon: const Icon(Icons.email_outlined),
                               filled: true,
@@ -226,17 +226,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                                 vertical: 18,
                               ),
                             ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter your email';
-                              }
-                              if (!RegExp(
-                                r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-                              ).hasMatch(value)) {
-                                return 'Please enter a valid email';
-                              }
-                              return null;
-                            },
+    
                           ),
                           const SizedBox(height: 20),
 

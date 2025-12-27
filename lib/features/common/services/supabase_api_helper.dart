@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../config/app_config.dart';
 
-class SupabseApiHelper {
+class SupabaseApiHelper {
   // Build headers with auth token
   static Future<Map<String, String>> httpHeader() async {
     final prefs = await SharedPreferences.getInstance();
@@ -33,7 +33,7 @@ class SupabseApiHelper {
   }
 
   // POST request
-  static Future<dynamic> post(String route, Map<String, dynamic> data) async {
+  static Future<dynamic> post(String route, Map<String, dynamic>? data) async {
     final headers = await httpHeader();
     Uri uri = Uri.parse('${appConfig.apiBaseUrl}/rest/v1/rpc/$route');
     final response = await http.post(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mobile_app_tech_techie_seminar/features/event/providers/providers.dart';
+import 'package:mobile_app_tech_techie_seminar/features/event/providers/event_service_provider.dart';
 import './quick_stats_bar.dart';
 
 class GradientHeader extends ConsumerWidget {
@@ -17,15 +17,10 @@ class GradientHeader extends ConsumerWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Color(0xFF8BC34A), // Light Green (from logo arc)
-            Color(0xFF4CAF50), // Main Green (from logo text)
-            Color(0xFF2E7D32), // Deep Green (darker shade)
+            Color(0xFF8BC34A), // Light Green
+            Color(0xFF4CAF50), // Main Green
+            Color(0xFF2E7D32), // Deep Green
           ],
-          // colors: [
-          //   Color(0xFF9333EA), // purple-600
-          //   Color(0xFFEC4899), // pink-500
-          //   Color(0xFFF97316), // orange-500
-          // ],
         ),
       ),
       child: Stack(
@@ -64,8 +59,11 @@ class GradientHeader extends ConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    // Menu Button - Opens Drawer
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Scaffold.of(context).openDrawer();
+                      },
                       icon: const Icon(Icons.menu, color: Colors.white),
                       style: IconButton.styleFrom(
                         backgroundColor: Colors.white.withOpacity(0.2),
@@ -76,7 +74,9 @@ class GradientHeader extends ConsumerWidget {
                         Stack(
                           children: [
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                // Navigate to notifications
+                              },
                               icon: const Icon(
                                 Icons.notifications_outlined,
                                 color: Colors.white,
@@ -114,7 +114,9 @@ class GradientHeader extends ConsumerWidget {
                         ),
                         const SizedBox(width: 8),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            // Navigate to search
+                          },
                           icon: const Icon(Icons.search, color: Colors.white),
                           style: IconButton.styleFrom(
                             backgroundColor: Colors.white.withOpacity(0.2),
@@ -124,26 +126,7 @@ class GradientHeader extends ConsumerWidget {
                     ),
                   ],
                 ),
-               
-                // Event Title
-                // Container(
-                //   padding: const EdgeInsets.symmetric(
-                //     horizontal: 16,
-                //     vertical: 6,
-                //   ),
-                //   decoration: BoxDecoration(
-                //     color: Colors.white.withOpacity(0.2),
-                //     borderRadius: BorderRadius.circular(20),
-                //   ),
-                //   child: const Text(
-                //     'LIVE EVENT',
-                //     style: TextStyle(
-                //       color: Colors.white,
-                //       fontSize: 12,
-                //       fontWeight: FontWeight.bold,
-                //     ),
-                //   ),
-                // ),
+
                 const SizedBox(height: 20),
                 const Text(
                   'FAI Annual Seminar 2025',

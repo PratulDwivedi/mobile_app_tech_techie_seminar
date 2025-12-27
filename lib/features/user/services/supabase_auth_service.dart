@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../config/app_constants.dart';
-import '../../common/services/supabse_api_helper.dart';
+import '../../common/services/supabase_api_helper.dart';
 import '../models/current_user.dart';
 import 'auth_service.dart';
 
@@ -36,7 +36,7 @@ class SupabaseAuthService implements AuthService {
     required String email,
     required String password,
   }) async {
-    final authResponse = await SupabseApiHelper.post(ApiRoutes.signIn, {
+    final authResponse = await SupabaseApiHelper.post(ApiRoutes.signIn, {
       'p_login_id': email,
       'p_password': password,
     });
@@ -47,7 +47,7 @@ class SupabaseAuthService implements AuthService {
   @override
   Future<Map<String, dynamic>> getProfile() async {
     try {
-      final response = await SupabseApiHelper.get('profile');
+      final response = await SupabaseApiHelper.get('profile');
       if (response is List && response.isNotEmpty) {
         return response.first as Map<String, dynamic>;
       } else if (response is Map<String, dynamic>) {
@@ -63,7 +63,14 @@ class SupabaseAuthService implements AuthService {
 
   @override
   Future<void> signOut() async {
-    await _supabase.auth.signOut();
+    try {
+      // Clear SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('user_profile');
+      await prefs.remove('access_token');
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
