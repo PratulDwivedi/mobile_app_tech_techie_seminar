@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../user/models/current_user.dart';
-import '../../../user/providers/service_providers.dart';
+import '../models/current_user.dart';
+import '../services/auth_service.dart';
 
 /// 🔐 Auth State = CurrentUser (NOT Supabase)
 final authProvider = StateNotifierProvider<AuthNotifier, CurrentUser?>(
@@ -29,4 +29,9 @@ final userProfileProvider = Provider<Map<String, dynamic>?>((ref) {
 /// ✅ Simple boolean auth check (useful for guards)
 final isAuthenticatedProvider = Provider<bool>((ref) {
   return ref.watch(authProvider) != null;
+});
+
+// Service providers
+final authServiceProvider = Provider<AuthService>((ref) {
+  return AuthService.instance;
 });

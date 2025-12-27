@@ -13,6 +13,17 @@ class ResponseMessageModel {
     this.paging,
   });
 
+  factory ResponseMessageModel.error({
+    int statusCode = 500,
+    String message = 'Something went wrong',
+  }) {
+    return ResponseMessageModel(
+      isSuccess: false,
+      statusCode: statusCode,
+      message: message,
+      data: const [],
+    );
+  }
   factory ResponseMessageModel.fromJson(Map<String, dynamic> json) {
     return ResponseMessageModel(
       isSuccess: json['is_success'] ?? false,

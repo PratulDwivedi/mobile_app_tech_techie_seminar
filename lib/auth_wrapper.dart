@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_app_tech_techie_seminar/features/event/screens/seminar_home_screen.dart';
-import 'package:mobile_app_tech_techie_seminar/features/user/screens/login_screen.dart';
-import 'features/common/providers/riverpod/data_providers.dart';
+import 'package:mobile_app_tech_techie_seminar/features/auth/screens/login_screen.dart';
+import 'features/auth/providers/auth_service_provider.dart';
 import 'firebase/notification_service.dart';
 
 class AuthWrapper extends ConsumerWidget {

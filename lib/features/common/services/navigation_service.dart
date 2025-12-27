@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app_tech_techie_seminar/features/user/screens/login_screen.dart';
+import 'package:mobile_app_tech_techie_seminar/features/auth/screens/login_screen.dart';
 import '../../event/screens/seminar_home_screen.dart';
 import '../models/screen_args_model.dart';
 import '../screens/chat_screen.dart';
@@ -43,5 +43,16 @@ class NavigationService {
     }
     // If route is not in map, it might be a dynamic route handled by navigateTo
     return null;
+  }
+
+  static Future<dynamic>? clearAndNavigate(
+    String routeName, {
+    Object? arguments,
+  }) {
+    return navigatorKey.currentState?.pushNamedAndRemoveUntil(
+      routeName,
+      (route) => false,
+      arguments: arguments,
+    );
   }
 }

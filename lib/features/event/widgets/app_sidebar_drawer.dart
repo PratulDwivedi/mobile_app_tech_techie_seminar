@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../common/services/navigation_service.dart';
-import '../../user/providers/service_providers.dart';
+import '../../auth/providers/auth_service_provider.dart';
 
 class AppSidebarDrawer extends ConsumerWidget {
   const AppSidebarDrawer({super.key});

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../config/app_config.dart';
+import '../models/response_message_model.dart';
 
 class SupabaseApiHelper {
   // Build headers with auth token
@@ -14,6 +15,18 @@ class SupabaseApiHelper {
       'apikey': appConfig.localKey,
       if (accessToken != null) 'access_token': accessToken,
     };
+  }
+
+  static Future<ResponseMessageModel> safeApiCall(
+    Future<ResponseMessageModel> Function() call,
+  ) async {
+    try {
+      return await call();
+    } catch (e) {
+      print('API Error: $e');
+
+      return ResponseMessageModel.error(message: e.toString());
+    }
   }
 
   // GET request
@@ -33,7 +46,10 @@ class SupabaseApiHelper {
   }
 
   // POST request
-  static Future<dynamic> post(String route, Map<String, dynamic>? data) async {
+  static Future<ResponseMessageModel> post(
+    String route,
+    Map<String, dynamic>? data,
+  ) async {
     final headers = await httpHeader();
     Uri uri = Uri.parse('${appConfig.apiBaseUrl}/rest/v1/rpc/$route');
     final response = await http.post(
@@ -41,7 +57,7 @@ class SupabaseApiHelper {
       headers: headers,
       body: jsonEncode(data),
     );
-    return jsonDecode(response.body);
+    return ResponseMessageModel.fromJson(jsonDecode(response.body));
   }
 
   // DELETE request

@@ -1,8 +1,5 @@
 class ApiRoutes {
   static const String signIn = 'fn_signin_mobile_delegate';
   static const String profile = 'fn_get_mobile_delegate';
-  static const String logoUrl = 'fn_get_tenant_logo_url';
-  static const String userPages = 'fn_get_user_pages';
-  static const String pageSchema = 'fn_get_page_schema';
-  static const String userDevice = 'fn_save_user_device';
+  static const String updatePassword = 'fn_update_password_mobile_delegate';
 }

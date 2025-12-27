@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../providers/service_providers.dart';
+import '../../common/services/app_snackbar_service.dart';
+import '../providers/auth_service_provider.dart';
 import '../../common/services/navigation_service.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -38,65 +39,33 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
   Future<void> _handleLogin() async {
     if (!_formKey.currentState!.validate()) return;
 
-    setState(() {
-      _isLoading = true;
-    });
+    setState(() => _isLoading = true);
 
-    try {
-      final authService = ref.read(authServiceProvider);
+    final authService = ref.read(authServiceProvider);
 
-      // Call signIn which now returns both auth response and profile
-      final result = await authService.signIn(
-        email: _emailController.text.trim(),
-        password: _passwordController.text,
-      );
+    final apiResponse = await authService.signIn(
+      email: _emailController.text.trim(),
+      password: _passwordController.text,
+    );
 
-      // Handle successful login
-      if (result['is_success'] == true) {
-        final data = result['data'];
-        final profile = data[0];
+    if (!mounted) return;
 
-        if (data != null && profile != null) {
-          // Store profile in shared preferences
-          final prefs = await SharedPreferences.getInstance();
-          await prefs.setString('user_profile', json.encode(profile));
+    setState(() => _isLoading = false);
 
-          // Fallback to a default dynamic screen if no mobile route specified
-          NavigationService.navigateTo('home', arguments: {'isHome': true});
-        } else {
-          // Fallback to a default dynamic screen if profile fetch failed
-          NavigationService.navigateTo('login', arguments: {'isHome': false});
-        }
-      } else {
-        // Fallback to a default dynamic screen if auth failed
-        NavigationService.navigateTo('login', arguments: {'isHome': false});
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Row(
-              children: [
-                const Icon(Icons.error, color: Colors.white),
-                const SizedBox(width: 8),
-                Expanded(child: Text('Error: ${e.toString()}')),
-              ],
-            ),
-            backgroundColor: Colors.red,
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-        );
-      }
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-      }
+    if (!apiResponse.isSuccess) {
+      AppSnackbarService.error(apiResponse.message);
+      return;
     }
+
+    if (apiResponse.data.isEmpty) {
+      AppSnackbarService.error('Login succeeded but profile not found');
+      return;
+    }
+
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('user_profile', json.encode(apiResponse.data.first));
+
+    NavigationService.clearAndNavigate('home', arguments: {'isHome': true});
   }
 
   @override
@@ -226,7 +195,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                                 vertical: 18,
                               ),
                             ),
-    
                           ),
                           const SizedBox(height: 20),
 

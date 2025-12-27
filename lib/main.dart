@@ -4,6 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'auth_wrapper.dart';
 import 'config/app_config.dart';
+import 'features/common/services/app_snackbar_service.dart';
 import 'features/common/services/navigation_service.dart';
 import 'firebase/firebase_options.dart';
 import 'firebase/notification_service.dart';
@@ -45,6 +46,7 @@ class MyApp extends ConsumerWidget {
       onGenerateRoute: NavigationService.onGenerateRoute,
       home: AuthWrapper(notificationServices: notificationServices),
       debugShowCheckedModeBanner: false,
+      scaffoldMessengerKey: AppSnackbarService.scaffoldMessengerKey,
     );
   }
 }
