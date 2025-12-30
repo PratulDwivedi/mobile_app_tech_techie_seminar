@@ -1,6 +1,7 @@
 import '../models/screen_args_model.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import '../widgets/common_gradient_header_widget.dart';
 
 class WebViewScreen extends StatefulWidget {
   final ScreenArgsModel args;
@@ -34,12 +35,23 @@ class _WebViewScreenState extends State<WebViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.args.name)),
-      body: AnimatedOpacity(
-        curve: Curves.fastOutSlowIn,
-        opacity: isMapVisible ? 1.0 : 0,
-        duration: const Duration(milliseconds: 400),
-        child: WebViewWidget(controller: _controller),
+      body: Column(
+        children: [
+          // Gradient Header
+          CommonGradientHeader(
+            title: widget.args.name,
+          ),
+
+          // WebView Content
+          Expanded(
+            child: AnimatedOpacity(
+              curve: Curves.fastOutSlowIn,
+              opacity: isMapVisible ? 1.0 : 0,
+              duration: const Duration(milliseconds: 400),
+              child: WebViewWidget(controller: _controller),
+            ),
+          ),
+        ],
       ),
     );
   }
