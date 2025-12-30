@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../common/models/screen_args_model.dart';
 import '../../common/services/navigation_service.dart';
 import '../../auth/providers/auth_service_provider.dart';
 
@@ -142,7 +143,16 @@ class AppSidebarDrawer extends ConsumerWidget {
                     title: 'Feedback',
                     onTap: () {
                       Navigator.pop(context);
-                      // Navigate to feedback
+                      ScreenArgsModel screenArgsModel = ScreenArgsModel(
+                        routeName: "webview",
+                        name: "Feedback",
+                        data: {"webUrl": "https://assetops.lovable.app/solutions"},
+                      );
+
+                      NavigationService.navigateTo(
+                        screenArgsModel.routeName,
+                        arguments: screenArgsModel,
+                      );
                     },
                   ),
                   _DrawerMenuItem(
@@ -151,7 +161,16 @@ class AppSidebarDrawer extends ConsumerWidget {
                     title: 'FAQs',
                     onTap: () {
                       Navigator.pop(context);
-                      // Navigate to FAQs
+                      ScreenArgsModel screenArgsModel = ScreenArgsModel(
+                        routeName: "webview",
+                        name: "FAQs",
+                        data: {"webUrl": "https://assetops.lovable.app/"},
+                      );
+
+                      NavigationService.navigateTo(
+                        screenArgsModel.routeName,
+                        arguments: screenArgsModel,
+                      );
                     },
                   ),
                   const Divider(height: 32, thickness: 1),

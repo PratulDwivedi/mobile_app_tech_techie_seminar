@@ -113,8 +113,7 @@ class NotificationServices {
     try {
       ScreenArgsModel screenArgsModel = ScreenArgsModel(
         routeName: message.data["routeName"].toString(),
-        pageName: message.data["pageName"].toString(),
-        isHome: false,
+        name: message.data["name"].toString(),
         data: message.data,
       );
 

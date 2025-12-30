@@ -3,6 +3,7 @@ import 'package:mobile_app_tech_techie_seminar/features/auth/screens/login_scree
 import '../../event/screens/seminar_home_screen.dart';
 import '../models/screen_args_model.dart';
 import '../screens/chat_screen.dart';
+import '../screens/web_view_screen.dart';
 
 class NavigationService {
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -24,15 +25,17 @@ class NavigationService {
       } else if (arguments is Map<String, dynamic>) {
         args = ScreenArgsModel(
           routeName: routeName,
-          pageName: routeName,
+          name: routeName,
           data: arguments,
         );
       } else {
-        args = ScreenArgsModel(routeName: routeName, pageName: routeName);
+        args = ScreenArgsModel(routeName: routeName, name: routeName);
       }
-      // navigatorKey.currentState?.push(
-      //   MaterialPageRoute(builder: (context) => DynamicScreen(args: args)),
-      // );
+      if (routeName == "webview") {
+        navigatorKey.currentState?.push(
+          MaterialPageRoute(builder: (context) => WebViewScreen(args: args)),
+        );
+      }
     }
   }
 
