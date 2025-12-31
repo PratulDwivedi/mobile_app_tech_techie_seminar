@@ -24,16 +24,37 @@ class ResponseMessageModel {
       data: const [],
     );
   }
+
   factory ResponseMessageModel.fromJson(Map<String, dynamic> json) {
+    // Handle data field - it can be either a List or a Map
+    List<Map<String, dynamic>> dataList = [];
+
+    if (json['data'] != null) {
+      if (json['data'] is List) {
+        // It's a list - convert each item
+        dataList = (json['data'] as List).map((item) {
+          if (item is Map<String, dynamic>) {
+            return item;
+          } else if (item is Map) {
+            return Map<String, dynamic>.from(item);
+          }
+          return <String, dynamic>{};
+        }).toList();
+      } else if (json['data'] is Map) {
+        // It's a single map - wrap it in a list
+        dataList = [
+          json['data'] is Map<String, dynamic>
+              ? json['data'] as Map<String, dynamic>
+              : Map<String, dynamic>.from(json['data'] as Map),
+        ];
+      }
+    }
+
     return ResponseMessageModel(
       isSuccess: json['is_success'] ?? false,
       statusCode: json['status_code'] ?? 0,
       message: json['message'] ?? '',
-      data:
-          (json['data'] as List<dynamic>?)
-              ?.map((item) => Map<String, dynamic>.from(item as Map))
-              .toList() ??
-          [],
+      data: dataList,
       paging: json['paging'] != null
           ? Paging.fromJson(json['paging'] as Map<String, dynamic>)
           : null,

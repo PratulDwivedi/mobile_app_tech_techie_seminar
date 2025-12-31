@@ -6,19 +6,27 @@ import 'event_service.dart';
 class SupabaseEventService implements EventService {
   @override
   Future<ResponseMessageModel> getProgramDateWise() async {
-    final authResponse = await SupabaseApiHelper.post(ApiRoutes.signIn, null);
-    return authResponse;
+    final response = await SupabaseApiHelper.post(ApiRoutes.signIn, null);
+    return response;
   }
 
   @override
   Future<ResponseMessageModel> getProgramSessionWise() async {
-    final authResponse = await SupabaseApiHelper.post(ApiRoutes.signIn, null);
-    return authResponse;
+    final response = await SupabaseApiHelper.post(ApiRoutes.signIn, null);
+    return response;
   }
 
   @override
   Future<ResponseMessageModel> getProgramSpeakerWise() async {
-    final authResponse = await SupabaseApiHelper.post(ApiRoutes.signIn, null);
-    return authResponse;
+    final response = await SupabaseApiHelper.post(ApiRoutes.signIn, null);
+    return response;
+  }
+
+  @override
+  Future<ResponseMessageModel> getHtmlContent(int pageId) async {
+    final response = await SupabaseApiHelper.post(ApiRoutes.htmlContent, {
+      "p_page_id": pageId,
+    });
+    return response;
   }
 }

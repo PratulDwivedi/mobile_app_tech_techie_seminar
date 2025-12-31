@@ -28,6 +28,15 @@ class SocialPostNotifier extends StateNotifier<SocialPost> {
   }
 }
 
+// HTML Content Provider (for a specific page)
+final htmlContentProvider = FutureProvider.family<ResponseMessageModel, int>((
+  ref,
+  pageId,
+) async {
+  final service = ref.watch(eventServiceProvider);
+  return await service.getHtmlContent(pageId);
+});
+
 final programDateWiseProvider = FutureProvider<ResponseMessageModel>((
   ref,
 ) async {

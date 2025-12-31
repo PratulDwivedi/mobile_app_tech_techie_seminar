@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../common/models/screen_args_model.dart';
+import '../../common/services/navigation_service.dart';
+
 class DGMessageCard extends StatelessWidget {
   const DGMessageCard({super.key});
 
@@ -89,7 +92,18 @@ class DGMessageCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    ScreenArgsModel screenArgsModel = ScreenArgsModel(
+                      routeName: "webview",
+                      name: "From the DG's Desk",
+                      data: {"page_id": 59},
+                    );
+
+                    NavigationService.navigateTo(
+                      screenArgsModel.routeName,
+                      arguments: screenArgsModel,
+                    );
+                  },
                   icon: const Icon(Icons.book, size: 16),
                   label: const Text('Read Full Message'),
                   style: ElevatedButton.styleFrom(

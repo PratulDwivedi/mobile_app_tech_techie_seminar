@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../common/models/screen_args_model.dart';
+import '../../common/services/navigation_service.dart';
 
 class InfoCardsSection extends StatelessWidget {
   const InfoCardsSection({super.key});
@@ -6,20 +8,44 @@ class InfoCardsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: const [
+      children: [
         Expanded(
           child: InfoCard(
             icon: Icons.book,
             title: 'About FAI',
-            gradientColors: [Color(0xFF3B82F6), Color(0xFF2563EB)],
+            gradientColors: const [Color(0xFF3B82F6), Color(0xFF2563EB)],
+            onTap: () {
+              ScreenArgsModel screenArgsModel = ScreenArgsModel(
+                routeName: "webview",
+                name: "About FAI",
+                data: {"page_id": 63},
+              );
+
+              NavigationService.navigateTo(
+                screenArgsModel.routeName,
+                arguments: screenArgsModel,
+              );
+            },
           ),
         ),
-        SizedBox(width: 16),
+        const SizedBox(width: 16),
         Expanded(
           child: InfoCard(
             icon: Icons.star,
             title: 'Theme & Highlights',
-            gradientColors: [Color(0xFFF59E0B), Color(0xFFF97316)],
+            gradientColors: const [Color(0xFFF59E0B), Color(0xFFF97316)],
+            onTap: () {
+              ScreenArgsModel screenArgsModel = ScreenArgsModel(
+                routeName: "webview",
+                name: "Theme & Highlights",
+                data: {"page_id": 220},
+              );
+
+              NavigationService.navigateTo(
+                screenArgsModel.routeName,
+                arguments: screenArgsModel,
+              );
+            },
           ),
         ),
       ],
@@ -31,19 +57,22 @@ class InfoCard extends StatelessWidget {
   final IconData icon;
   final String title;
   final List<Color> gradientColors;
+  final VoidCallback onTap;
 
   const InfoCard({
     super.key,
     required this.icon,
     required this.title,
     required this.gradientColors,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
-      child: Container(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(20),
+      child: Ink(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -51,28 +80,38 @@ class InfoCard extends StatelessWidget {
             colors: gradientColors,
           ),
           borderRadius: BorderRadius.circular(20),
-        ),
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(icon, color: Colors.white, size: 24),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-              ),
+          boxShadow: [
+            BoxShadow(
+              color: gradientColors.first.withOpacity(0.3),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
             ),
           ],
+        ),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(icon, color: Colors.white, size: 24),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

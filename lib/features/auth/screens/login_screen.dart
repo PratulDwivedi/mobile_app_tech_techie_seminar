@@ -26,7 +26,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
     super.initState();
 
     _emailController.text = "pratul@gmail.com";
-    _passwordController.text = "Pratul@123";
+    _passwordController.text = "fai@123";
   }
 
   @override
@@ -64,6 +64,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
 
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('user_profile', json.encode(apiResponse.data.first));
+    await prefs.setString('access_token', apiResponse.data[0]['access_token']);
+
+    print(apiResponse.data[0]['access_token']);
 
     NavigationService.clearAndNavigate('home', arguments: {'isHome': true});
   }

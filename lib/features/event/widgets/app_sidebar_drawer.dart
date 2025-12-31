@@ -146,7 +146,7 @@ class AppSidebarDrawer extends ConsumerWidget {
                       ScreenArgsModel screenArgsModel = ScreenArgsModel(
                         routeName: "webview",
                         name: "Feedback",
-                        data: {"webUrl": "https://assetops.lovable.app/solutions"},
+                        data: {"page_id": 222},
                       );
 
                       NavigationService.navigateTo(
@@ -164,7 +164,7 @@ class AppSidebarDrawer extends ConsumerWidget {
                       ScreenArgsModel screenArgsModel = ScreenArgsModel(
                         routeName: "webview",
                         name: "FAQs",
-                        data: {"webUrl": "https://assetops.lovable.app/"},
+                        data: {"page_id": 249},
                       );
 
                       NavigationService.navigateTo(
