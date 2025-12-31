@@ -10,7 +10,6 @@ class ApiPages {
   static const int exhibition = 60;
   static const int registration = 62;
   static const int aboutFai = 63;
-  static const int registrationForms = 151;
   static const int seminarTheme = 220;
   static const int conferenceHotel = 222;
   static const int culturalProgramme = 237;
