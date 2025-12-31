@@ -1,15 +1,3 @@
-class EventStats {
-  final String attendees;
-  final String speakers;
-  final String days;
-
-  EventStats({
-    required this.attendees,
-    required this.speakers,
-    required this.days,
-  });
-}
-
 class SocialPost {
   final String user;
   final String time;

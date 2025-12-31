@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class CommonGradientHeader extends StatelessWidget {
   final String title;
-  const CommonGradientHeader({super.key, required this.title});
+  final VoidCallback? onRefresh;
+  const CommonGradientHeader({super.key, required this.title, this.onRefresh});
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +81,14 @@ class CommonGradientHeader extends StatelessWidget {
                           ),
                         ),
                       ),
+                      if (onRefresh != null)
+                        IconButton(
+                          onPressed: onRefresh,
+                          icon: const Icon(Icons.refresh, color: Colors.white),
+                          style: IconButton.styleFrom(
+                            backgroundColor: Colors.white.withOpacity(0.2),
+                          ),
+                        ),
                     ],
                   ),
                 ),

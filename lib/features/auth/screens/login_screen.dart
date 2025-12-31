@@ -66,9 +66,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
     await prefs.setString('user_profile', json.encode(apiResponse.data.first));
     await prefs.setString('access_token', apiResponse.data[0]['access_token']);
 
-    print(apiResponse.data[0]['access_token']);
-
-    NavigationService.clearAndNavigate('home', arguments: {'isHome': true});
+    NavigationService.clearAndNavigate('home');
   }
 
   @override

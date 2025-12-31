@@ -8,8 +8,15 @@ class GradientHeader extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final stats = ref.watch(eventStatsProvider);
-    final notificationCount = ref.watch(notificationCountProvider);
+
+    final summaryAsync = ref.watch(eventSummaryCountProvider);
+
+    // Extract notification count from summary data
+    int notificationCount = 0;
+    if (summaryAsync.hasValue && summaryAsync.value!.isSuccess) {
+      final stats = summaryAsync.value!.firstOrNull ?? {};
+      notificationCount = (stats['notifications'] as int?) ?? 0;
+    }
 
     return Container(
       decoration: const BoxDecoration(
@@ -122,24 +129,84 @@ class GradientHeader extends ConsumerWidget {
                             backgroundColor: Colors.white.withOpacity(0.2),
                           ),
                         ),
+                        const SizedBox(width: 8),
+                        IconButton(
+                          onPressed: () {
+                            ref.invalidate(eventSummaryCountProvider);
+                          },
+                          icon: const Icon(Icons.refresh, color: Colors.white),
+                          style: IconButton.styleFrom(
+                            backgroundColor: Colors.white.withOpacity(0.2),
+                          ),
+                        ),
                       ],
                     ),
                   ],
                 ),
 
                 const SizedBox(height: 20),
-                const Text(
-                  'FAI Annual Seminar 2025',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+                summaryAsync.when(
+                  loading: () => const SizedBox(
+                    height: 120,
+                    child: Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    ),
                   ),
-                ),
 
-                const SizedBox(height: 50),
-                // Quick Stats
-                QuickStatsBar(stats: stats),
+                  error: (err, _) => SizedBox(
+                    height: 120,
+                    child: Center(
+                      child: Text(
+                        err.toString(),
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+
+                  data: (response) {
+                    // ❌ API returned failure
+                    if (!response.isSuccess) {
+                      return SizedBox(
+                        height: 120,
+                        child: Center(
+                          child: Text(
+                            response.message,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      );
+                    }
+
+                    // ✅ Safe extraction
+                    final stats =
+                        response.firstOrNull ??
+                        {'delegates': 0, 'speakers': 0, 'exhibitors': 0};
+
+                    final eventName =
+                        stats['event_name']?.toString() ?? 'Event';
+
+                    return Column(
+                      children: [
+                        const SizedBox(height: 20),
+
+                        // 🏷 Event Name
+                        Text(
+                          eventName,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+
+                        const SizedBox(height: 40),
+
+                        // 📈 Quick Stats
+                        QuickStatsBar(stats: stats),
+                      ],
+                    );
+                  },
+                ),
               ],
             ),
           ),

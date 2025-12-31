@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app_tech_techie_seminar/features/event/models/model.dart';
 
 class QuickStatsBar extends StatelessWidget {
-  final EventStats stats;
+  final Map<String, dynamic> stats;
 
   const QuickStatsBar({super.key, required this.stats});
 
@@ -20,26 +19,38 @@ class QuickStatsBar extends StatelessWidget {
         children: [
           StatItem(
             icon: Icons.people,
-            value: stats.attendees,
+            value: stats['delegates'] ?? 0, // ✅
             label: 'Delegates',
           ),
-          Container(width: 1, height: 40, color: Colors.white.withOpacity(0.2)),
-          StatItem(icon: Icons.mic, value: stats.speakers, label: 'Speakers'),
-          Container(width: 1, height: 40, color: Colors.white.withOpacity(0.2)),
+          _divider(context),
+          StatItem(
+            icon: Icons.mic,
+            value: stats['speakers'] ?? 0, // ✅ FIXED
+            label: 'Speakers',
+          ),
+          _divider(context),
           StatItem(
             icon: Icons.shop,
-            value: stats.days,
+            value: stats['exhibitors'] ?? 0, // ✅ FIXED
             label: 'Exhibitors',
           ),
         ],
       ),
     );
   }
+
+  Widget _divider(BuildContext context) {
+    return Container(
+      width: 1,
+      height: 40,
+      color: Colors.white.withOpacity(0.2),
+    );
+  }
 }
 
 class StatItem extends StatelessWidget {
   final IconData icon;
-  final String value;
+  final int value; // ✅ int
   final String label;
 
   const StatItem({
@@ -56,7 +67,7 @@ class StatItem extends StatelessWidget {
         Icon(icon, color: Colors.white, size: 20),
         const SizedBox(height: 4),
         Text(
-          value,
+          value.toString(), // ✅ safe
           style: const TextStyle(
             color: Colors.white,
             fontSize: 20,

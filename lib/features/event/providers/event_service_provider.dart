@@ -37,11 +37,19 @@ final htmlContentProvider = FutureProvider.family<ResponseMessageModel, int>((
   return await service.getHtmlContent(pageId);
 });
 
+final eventSummaryCountProvider = FutureProvider<ResponseMessageModel>((
+  ref,
+) async {
+  final service = ref.watch(eventServiceProvider);
+  print("eventSummaryCountProvider: calling getSummaryCount");
+  return await service.getSummaryCount();
+});
+
 final programDateWiseProvider = FutureProvider<ResponseMessageModel>((
   ref,
 ) async {
   final service = ref.watch(eventServiceProvider);
-  // Replace with actual event ID from your context
+
   return await service.getProgramDateWise();
 });
 
@@ -49,7 +57,6 @@ final programSessionWiseProvider = FutureProvider<ResponseMessageModel>((
   ref,
 ) async {
   final service = ref.watch(eventServiceProvider);
-  // Replace with actual event ID from your context
   return await service.getProgramSessionWise();
 });
 
@@ -59,12 +66,6 @@ final programSpeakerWiseProvider = FutureProvider<ResponseMessageModel>((
   final service = ref.watch(eventServiceProvider);
   return await service.getProgramSpeakerWise();
 });
-
-final eventStatsProvider = Provider<EventStats>((ref) {
-  return EventStats(attendees: '1,250+', speakers: '25', days: '3');
-});
-
-final notificationCountProvider = StateProvider<int>((ref) => 3);
 
 final activeTabProvider = StateProvider<int>((ref) => 0);
 

@@ -66,7 +66,15 @@ class _WebViewScreenState extends ConsumerState<WebViewScreen> {
       body: Column(
         children: [
           // Gradient Header
-          CommonGradientHeader(title: widget.args.name),
+          CommonGradientHeader(
+            title: widget.args.name,
+            onRefresh: pageId != null ? () {
+              ref.invalidate(htmlContentProvider(pageId));
+              setState(() {
+                _isWebViewReady = false;
+              });
+            } : null,
+          ),
 
           // WebView Content
           Expanded(
