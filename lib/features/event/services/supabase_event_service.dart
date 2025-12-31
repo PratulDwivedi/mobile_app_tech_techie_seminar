@@ -1,6 +1,7 @@
 import '../../../config/app_constants.dart';
 import '../../common/models/response_message_model.dart';
 import '../../common/services/supabase_api_helper.dart';
+import '../models/delegate_filter.dart';
 import 'event_service.dart';
 
 class SupabaseEventService implements EventService {
@@ -53,8 +54,21 @@ class SupabaseEventService implements EventService {
   Future<ResponseMessageModel> getDelegates(int pageNo) async {
     final response = await SupabaseApiHelper.post(ApiRoutes.delegates, {
       "p_page_no": pageNo,
-
     });
+    return response;
+  }
+
+  @override
+  Future<ResponseMessageModel> getDelegatesWithFilter(int pageNo, DelegateFilter? filter) async {
+    final requestBody = {
+      "p_page_no": pageNo,
+      "p_order_by": filter?.orderBy ?? 1,
+      "p_key": filter?.searchKey ?? '',
+      "p_companies": filter?.companies ?? '',
+      "p_alpha_key": filter?.alphaKey ?? '',
+      "p_delegate_id": filter?.delegateId ?? 0,
+    };
+    final response = await SupabaseApiHelper.post(ApiRoutes.delegates, requestBody);
     return response;
   }
 }
