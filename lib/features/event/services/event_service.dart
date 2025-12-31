@@ -16,6 +16,8 @@ abstract class EventService {
   Future<ResponseMessageModel> getProgramSpeakerWise();
   //
   Future<ResponseMessageModel> getSpeakers();
+  Future<ResponseMessageModel> getSponsors();
+
   Future<ResponseMessageModel> getSummaryCount();
   Future<ResponseMessageModel> getHtmlContent(int pageId);
 }

@@ -71,6 +71,11 @@ final speakersProvider = FutureProvider<ResponseMessageModel>((ref) async {
   return await service.getSpeakers();
 });
 
+final sponsorsProvider = FutureProvider<ResponseMessageModel>((ref) async {
+  final service = ref.watch(eventServiceProvider);
+  return await service.getSponsors();
+});
+
 final activeTabProvider = StateProvider<int>((ref) => 0);
 
 final socialPostProvider =

@@ -42,4 +42,10 @@ class SupabaseEventService implements EventService {
     final response = await SupabaseApiHelper.post(ApiRoutes.speakers, null);
     return response;
   }
+
+  @override
+  Future<ResponseMessageModel> getSponsors() async {
+    final response = await SupabaseApiHelper.post(ApiRoutes.sponsors, null);
+    return response;
+  }
 }
