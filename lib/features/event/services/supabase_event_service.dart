@@ -48,4 +48,13 @@ class SupabaseEventService implements EventService {
     final response = await SupabaseApiHelper.post(ApiRoutes.sponsors, null);
     return response;
   }
+
+  @override
+  Future<ResponseMessageModel> getDelegates(int pageNo) async {
+    final response = await SupabaseApiHelper.post(ApiRoutes.delegates, {
+      "p_page_no": pageNo,
+
+    });
+    return response;
+  }
 }

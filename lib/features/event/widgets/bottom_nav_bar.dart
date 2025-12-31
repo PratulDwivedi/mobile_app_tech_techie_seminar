@@ -3,15 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/app_constants.dart';
 import '../../common/models/screen_args_model.dart';
 import '../../common/services/navigation_service.dart';
-import '../providers/event_service_provider.dart';
 
 class BottomNavBar extends ConsumerWidget {
   const BottomNavBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final activeTab = ref.watch(activeTabProvider);
-
     return Container(
       decoration: const BoxDecoration(
         color: Color(0xFF111827),
@@ -25,9 +22,25 @@ class BottomNavBar extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _NavItem(
+                icon: Icons.person,
+                label: 'Delegates',
+                isActive: false,
+                onTap: () {
+                  ScreenArgsModel screenArgsModel = ScreenArgsModel(
+                    routeName: AppPageRoute.delegates,
+                    name: "Delegates",
+                    data: {},
+                  );
+                  NavigationService.navigateTo(
+                    screenArgsModel.routeName,
+                    arguments: screenArgsModel,
+                  );
+                },
+              ),
+              _NavItem(
                 icon: Icons.calendar_today,
                 label: 'Program',
-                isActive: activeTab == 0,
+                isActive: true,
                 onTap: () {
                   ScreenArgsModel screenArgsModel = ScreenArgsModel(
                     routeName: AppPageRoute.program,
@@ -41,26 +54,9 @@ class BottomNavBar extends ConsumerWidget {
                 },
               ),
               _NavItem(
-                icon: Icons.person,
-                label: 'Delegates',
-                isActive: activeTab == 1,
-                onTap: () {
-                  ScreenArgsModel screenArgsModel = ScreenArgsModel(
-                    routeName: AppPageRoute.delegates,
-                    name: "Delegates",
-                    data: {},
-                  );
-                  NavigationService.navigateTo(
-                    screenArgsModel.routeName,
-                    arguments: screenArgsModel,
-                  );
-                },
-              ),
-
-              _NavItem(
                 icon: Icons.card_membership,
                 label: 'Exhibitors',
-                isActive: activeTab == 4,
+                isActive: false,
                 onTap: () {
                   ScreenArgsModel screenArgsModel = ScreenArgsModel(
                     routeName: AppPageRoute.exhibitors,

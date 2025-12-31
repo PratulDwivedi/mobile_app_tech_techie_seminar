@@ -76,7 +76,13 @@ final sponsorsProvider = FutureProvider<ResponseMessageModel>((ref) async {
   return await service.getSponsors();
 });
 
-final activeTabProvider = StateProvider<int>((ref) => 0);
+final delegatesProvider = FutureProvider.family<ResponseMessageModel, int>((
+  ref,
+  pageNo,
+) async {
+  final service = ref.watch(eventServiceProvider);
+  return await service.getDelegates(pageNo);
+});
 
 final socialPostProvider =
     StateNotifierProvider<SocialPostNotifier, SocialPost>((ref) {
