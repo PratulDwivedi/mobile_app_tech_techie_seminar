@@ -10,10 +10,7 @@ class AppSidebarDrawer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Get user data from your auth provider
-    final userName = "Mr. Pratul";
-    final userEmail = "pratul@gmail.com";
-    final userInitials = "P";
+    final profileAsync = ref.watch(profileProvider);
 
     return Drawer(
       child: Container(
@@ -37,42 +34,94 @@ class AppSidebarDrawer extends ConsumerWidget {
               child: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(24, 32, 24, 24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // User Avatar
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundColor: Colors.white,
+                  child: profileAsync.when(
+                    loading: () => const SizedBox(
+                      height: 120,
+                      child: Center(
+                        child: CircularProgressIndicator(color: Colors.white),
+                      ),
+                    ),
+                    error: (err, _) => const SizedBox(
+                      height: 120,
+                      child: Center(
                         child: Text(
-                          userInitials,
-                          style: const TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF4CAF50),
+                          'Profile Error',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    data: (response) {
+                      if (!response.isSuccess) {
+                        return const SizedBox(
+                          height: 120,
+                          child: Center(
+                            child: Text(
+                              'Profile Not Available',
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      // User Name
-                      Text(
-                        userName,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      // User Email
-                      Text(
-                        userEmail,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white.withOpacity(0.9),
-                        ),
-                      ),
-                    ],
+                        );
+                      }
+
+                      final profileData = response.firstOrNull ?? {};
+                      final fullName =
+                          profileData['full_name']?.toString() ?? 'User';
+                      final email = profileData['e_mail_id']?.toString() ?? '';
+                      final profilePic = profileData['profile_pic']?.toString();
+
+                      // Get initials from full name
+                      final nameParts = fullName.split(' ');
+                      final initials = nameParts.length > 1
+                          ? '${nameParts[0][0]}${nameParts[1][0]}'.toUpperCase()
+                          : fullName.isNotEmpty
+                          ? fullName[0].toUpperCase()
+                          : 'U';
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // User Avatar
+                          CircleAvatar(
+                            radius: 40,
+                            backgroundColor: Colors.white,
+                            backgroundImage: profilePic != null
+                                ? NetworkImage(
+                                    'https://your-api-base-url/$profilePic',
+                                  ) // Replace with actual base URL
+                                : null,
+                            child: profilePic == null
+                                ? Text(
+                                    initials,
+                                    style: const TextStyle(
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF4CAF50),
+                                    ),
+                                  )
+                                : null,
+                          ),
+                          const SizedBox(height: 16),
+                          // User Name
+                          Text(
+                            fullName,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          // User Email
+                          Text(
+                            email,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white.withOpacity(0.9),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
               ),
@@ -263,7 +312,7 @@ class AppSidebarDrawer extends ConsumerWidget {
                       border: Border.all(color: Colors.grey[300]!),
                     ),
                     child: const Text(
-                      'MAADEN',
+                      'Sponsor Logo',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -271,11 +320,6 @@ class AppSidebarDrawer extends ConsumerWidget {
                         letterSpacing: 2,
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Powered by: Artificial Wit',
-                    style: TextStyle(fontSize: 10, color: Colors.grey[500]),
                   ),
                 ],
               ),

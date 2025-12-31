@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../config/app_constants.dart';
+import '../../common/models/screen_args_model.dart';
+import '../../common/services/navigation_service.dart';
 
 class QuickStatsBar extends StatelessWidget {
   final Map<String, dynamic> stats;
@@ -21,18 +24,48 @@ class QuickStatsBar extends StatelessWidget {
             icon: Icons.people,
             value: stats['delegates'] ?? 0, // ✅
             label: 'Delegates',
+            onTap: () {
+              final screenArgs = ScreenArgsModel(
+                routeName: AppPageRoute.delegates,
+                name: "Delegates",
+              );
+              NavigationService.navigateTo(
+                screenArgs.routeName,
+                arguments: screenArgs,
+              );
+            },
           ),
           _divider(context),
           StatItem(
             icon: Icons.mic,
             value: stats['speakers'] ?? 0, // ✅ FIXED
             label: 'Speakers',
+            onTap: () {
+              final screenArgs = ScreenArgsModel(
+                routeName: AppPageRoute.speakers,
+                name: "Speakers",
+              );
+              NavigationService.navigateTo(
+                screenArgs.routeName,
+                arguments: screenArgs,
+              );
+            },
           ),
           _divider(context),
           StatItem(
             icon: Icons.shop,
             value: stats['exhibitors'] ?? 0, // ✅ FIXED
             label: 'Exhibitors',
+            onTap: () {
+              final screenArgs = ScreenArgsModel(
+                routeName: AppPageRoute.exhibitors,
+                name: "Exhibitors",
+              );
+              NavigationService.navigateTo(
+                screenArgs.routeName,
+                arguments: screenArgs,
+              );
+            },
           ),
         ],
       ),
@@ -52,33 +85,42 @@ class StatItem extends StatelessWidget {
   final IconData icon;
   final int value; // ✅ int
   final String label;
+  final VoidCallback? onTap;
 
   const StatItem({
     super.key,
     required this.icon,
     required this.value,
     required this.label,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Icon(icon, color: Colors.white, size: 20),
-        const SizedBox(height: 4),
-        Text(
-          value.toString(), // ✅ safe
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(8),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        child: Column(
+          children: [
+            Icon(icon, color: Colors.white, size: 20),
+            const SizedBox(height: 4),
+            Text(
+              value.toString(), // ✅ safe
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              label,
+              style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 12),
+            ),
+          ],
         ),
-        Text(
-          label,
-          style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 12),
-        ),
-      ],
+      ),
     );
   }
 }
