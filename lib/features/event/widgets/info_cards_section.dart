@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../config/app_constants.dart';
 import '../../common/models/screen_args_model.dart';
 import '../../common/services/navigation_service.dart';
 
@@ -18,7 +19,7 @@ class InfoCardsSection extends StatelessWidget {
               ScreenArgsModel screenArgsModel = ScreenArgsModel(
                 routeName: "webview",
                 name: "About FAI",
-                data: {"page_id": 63},
+                data: {"page_id": ApiPages.aboutFai},
               );
 
               NavigationService.navigateTo(
@@ -38,7 +39,7 @@ class InfoCardsSection extends StatelessWidget {
               ScreenArgsModel screenArgsModel = ScreenArgsModel(
                 routeName: "webview",
                 name: "Theme & Highlights",
-                data: {"page_id": 220},
+                data: {"page_id": ApiPages.seminarTheme},
               );
 
               NavigationService.navigateTo(

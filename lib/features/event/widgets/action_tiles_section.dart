@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../config/app_constants.dart';
+import '../../common/models/screen_args_model.dart';
+import '../../common/services/navigation_service.dart';
 
 class ActionTilesSection extends StatelessWidget {
   const ActionTilesSection({super.key});
@@ -6,7 +9,7 @@ class ActionTilesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
+      children: [
         ActionTile(
           icon: Icons.museum,
           title: 'Exhibition',
@@ -16,31 +19,73 @@ class ActionTilesSection extends StatelessWidget {
             Color.fromARGB(255, 220, 242, 97),
             Color(0xFFF43F5E),
           ],
+          onTap: () {
+            NavigationService.navigateTo(
+              "webview",
+              arguments: ScreenArgsModel(
+                routeName: "webview",
+                name: "Exhibition",
+                data: {"page_id": ApiPages.exhibition},
+              ),
+            );
+          },
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
+
         ActionTile(
           icon: Icons.music_note,
-          title: 'Curtual Program',
-          subtitle: 'Curtual Program Details',
+          title: 'Cultural Program',
+          subtitle: 'Cultural Program Details',
           badge: 'Scan to enter',
           gradientColors: [Color(0xFF6366F1), Color(0xFF9333EA)],
+          onTap: () {
+            NavigationService.navigateTo(
+              "webview",
+              arguments: ScreenArgsModel(
+                routeName: "webview",
+                name: "Cultural Program",
+                data: {"page_id": ApiPages.culturalProgramme},
+              ),
+            );
+          },
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
+
         ActionTile(
           icon: Icons.photo_library,
           title: 'Gallery',
           subtitle: 'Photos & videos',
           badge: '250+ Photos',
           gradientColors: [Color(0xFFEC4899), Color(0xFFF43F5E)],
+          onTap: () {
+            NavigationService.navigateTo(
+              "gallery",
+              arguments: ScreenArgsModel(
+                routeName: "gallery",
+                name: "Gallery",
+                data: {},
+              ),
+            );
+          },
         ),
+        const SizedBox(height: 12),
 
-        SizedBox(height: 12),
         ActionTile(
           icon: Icons.download,
           title: 'Resources',
           subtitle: 'Presentations & documents',
           badge: '15 Files',
           gradientColors: [Color(0xFF14B8A6), Color(0xFF06B6D4)],
+          onTap: () {
+            NavigationService.navigateTo(
+              "resources",
+              arguments: ScreenArgsModel(
+                routeName: "resources",
+                name: "Resources",
+                data: {},
+              ),
+            );
+          },
         ),
       ],
     );
@@ -53,6 +98,7 @@ class ActionTile extends StatelessWidget {
   final String subtitle;
   final String badge;
   final List<Color> gradientColors;
+  final VoidCallback onTap; // 👈 ADD THIS
 
   const ActionTile({
     super.key,
@@ -61,12 +107,13 @@ class ActionTile extends StatelessWidget {
     required this.subtitle,
     required this.badge,
     required this.gradientColors,
+    required this.onTap, // 👈 ADD THIS
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap, // 👈 USE IT
       borderRadius: BorderRadius.circular(20),
       child: Container(
         padding: const EdgeInsets.all(16),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../config/app_constants.dart';
 import '../../common/models/screen_args_model.dart';
 import '../../common/services/navigation_service.dart';
 
@@ -96,7 +97,7 @@ class DGMessageCard extends StatelessWidget {
                     ScreenArgsModel screenArgsModel = ScreenArgsModel(
                       routeName: "webview",
                       name: "From the DG's Desk",
-                      data: {"page_id": 59},
+                      data: {"page_id": ApiPages.fromDgDesk},
                     );
 
                     NavigationService.navigateTo(

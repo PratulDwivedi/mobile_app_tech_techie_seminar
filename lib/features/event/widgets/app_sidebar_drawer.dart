@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import '../../../config/app_constants.dart';
 import '../../common/models/screen_args_model.dart';
 import '../../common/services/navigation_service.dart';
 import '../../auth/providers/auth_service_provider.dart';
@@ -144,9 +144,8 @@ class AppSidebarDrawer extends ConsumerWidget {
                     onTap: () {
                       Navigator.pop(context);
                       ScreenArgsModel screenArgsModel = ScreenArgsModel(
-                        routeName: "webview",
+                        routeName: "feedback",
                         name: "Feedback",
-                        data: {"page_id": 222},
                       );
 
                       NavigationService.navigateTo(
@@ -164,7 +163,7 @@ class AppSidebarDrawer extends ConsumerWidget {
                       ScreenArgsModel screenArgsModel = ScreenArgsModel(
                         routeName: "webview",
                         name: "FAQs",
-                        data: {"page_id": 249},
+                        data: {"page_id": ApiPages.faqs},
                       );
 
                       NavigationService.navigateTo(

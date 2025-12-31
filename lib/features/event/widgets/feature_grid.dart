@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../config/app_constants.dart';
 import '../../common/models/screen_args_model.dart';
 import '../../common/services/navigation_service.dart';
 
@@ -106,7 +107,7 @@ class FeatureGrid extends StatelessWidget {
             ScreenArgsModel screenArgsModel = ScreenArgsModel(
               routeName: "webview",
               name: "Registrations",
-              data: {"page_id": 62}, // Update with actual page ID
+              data: {"page_id": ApiPages.registrationForms}, // Update with actual page ID
             );
             NavigationService.navigateTo(
               screenArgsModel.routeName,
