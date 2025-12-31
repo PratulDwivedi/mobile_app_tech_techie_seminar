@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import '../../common/widgets/common_gradient_header_widget.dart';
 import '../../common/widgets/widget_utils.dart';
 
