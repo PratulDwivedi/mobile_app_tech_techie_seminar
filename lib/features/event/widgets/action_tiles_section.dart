@@ -25,7 +25,7 @@ class ActionTilesSection extends StatelessWidget {
               arguments: ScreenArgsModel(
                 routeName: "webview",
                 name: "Exhibition",
-                data: {"page_id": ApiPages.exhibition},
+                data: {"page_id": AppPageIds.exhibition},
               ),
             );
           },
@@ -44,7 +44,7 @@ class ActionTilesSection extends StatelessWidget {
               arguments: ScreenArgsModel(
                 routeName: "webview",
                 name: "Cultural Program",
-                data: {"page_id": ApiPages.culturalProgramme},
+                data: {"page_id": AppPageIds.culturalProgramme},
               ),
             );
           },
@@ -59,9 +59,9 @@ class ActionTilesSection extends StatelessWidget {
           gradientColors: [Color(0xFFEC4899), Color(0xFFF43F5E)],
           onTap: () {
             NavigationService.navigateTo(
-              "gallery",
+              ApiRoutes.gallery,
               arguments: ScreenArgsModel(
-                routeName: "gallery",
+                routeName: AppPageRoute.gallery,
                 name: "Gallery",
                 data: {},
               ),
@@ -78,9 +78,9 @@ class ActionTilesSection extends StatelessWidget {
           gradientColors: [Color(0xFF14B8A6), Color(0xFF06B6D4)],
           onTap: () {
             NavigationService.navigateTo(
-              "resources",
+              ApiRoutes.documents,
               arguments: ScreenArgsModel(
-                routeName: "resources",
+                routeName: AppPageRoute.documents,
                 name: "Resources",
                 data: {},
               ),

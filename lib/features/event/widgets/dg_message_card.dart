@@ -97,7 +97,7 @@ class DGMessageCard extends StatelessWidget {
                     ScreenArgsModel screenArgsModel = ScreenArgsModel(
                       routeName: "webview",
                       name: "From the DG's Desk",
-                      data: {"page_id": ApiPages.fromDgDesk},
+                      data: {"page_id": AppPageIds.fromDgDesk},
                     );
 
                     NavigationService.navigateTo(

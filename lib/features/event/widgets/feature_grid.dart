@@ -23,7 +23,7 @@ class FeatureGrid extends StatelessWidget {
           gradientColors: const [Color(0xFF06B6D4), Color(0xFF2563EB)],
           onTap: () {
             ScreenArgsModel screenArgsModel = ScreenArgsModel(
-              routeName: "program", // or "webview" if it's a web page
+              routeName: AppPageRoute.program, 
               name: "Program",
               data: {},
             );
@@ -42,7 +42,7 @@ class FeatureGrid extends StatelessWidget {
           gradientColors: const [Color(0xFF9333EA), Color(0xFFEC4899)],
           onTap: () {
             ScreenArgsModel screenArgsModel = ScreenArgsModel(
-              routeName: "speakers", // or your speakers route
+              routeName: AppPageRoute.speakers, 
               name: "Speakers",
               data: {},
             );
@@ -64,7 +64,7 @@ class FeatureGrid extends StatelessWidget {
           ],
           onTap: () {
             ScreenArgsModel screenArgsModel = ScreenArgsModel(
-              routeName: "sponsors",
+              routeName: AppPageRoute.sponsors,
               name: "Sponsors",
               data: {},
             );
@@ -83,7 +83,7 @@ class FeatureGrid extends StatelessWidget {
           gradientColors: const [Color(0xFFF97316), Color(0xFFEF4444)],
           onTap: () {
             ScreenArgsModel screenArgsModel = ScreenArgsModel(
-              routeName: "exhibitors",
+              routeName: AppPageRoute.exhibitors,
               name: "Exhibitors",
               data: {},
             );
@@ -107,7 +107,7 @@ class FeatureGrid extends StatelessWidget {
             ScreenArgsModel screenArgsModel = ScreenArgsModel(
               routeName: "webview",
               name: "Registrations",
-              data: {"page_id": ApiPages.registration}, 
+              data: {"page_id": AppPageIds.registration}, 
             );
             NavigationService.navigateTo(
               screenArgsModel.routeName,
@@ -127,7 +127,7 @@ class FeatureGrid extends StatelessWidget {
           ],
           onTap: () {
             ScreenArgsModel screenArgsModel = ScreenArgsModel(
-              routeName: "delegates",
+              routeName: AppPageRoute.delegates,
               name: "Delegates",
               data: {},
             );

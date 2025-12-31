@@ -4,9 +4,46 @@ class ApiRoutes {
   static const String updatePassword = 'seminar.fn_update_delegate_password';
   static const String htmlContent = 'seminar.fn_get_mobile_html_content';
   static const String summaryCount = 'seminar.fn_get_mobile_event_counts';
+
+  static const String myAppointments =
+      'seminar.fn_get_mobile_my_appointments'; //
+  static const String nearbyPlaces = 'seminar.fn_get_mobile_nearby_places'; //
+  static const String placesOfInterest =
+      'seminar.fn_get_mobile_places_of_interest'; //
+  static const String bookCab = 'seminar.fn_book_cab'; //
+  static const String helpline = 'seminar.fn_get_mobile_helpline'; //
+  static const String feedback = 'seminar.fn_get_mobile_feedback'; //
+  static const String gallery = 'seminar.fn_get_mobile_gallery'; //
+  static const String documents = 'seminar.fn_get_mobile_documents'; //
+  static const String program = 'seminar.fn_get_mobile_program'; //
+  static const String speakers = 'seminar.fn_get_mobile_speakers'; //
+  static const String sponsors = 'seminar.fn_get_mobile_sponsors'; //
+  static const String exhibitors = 'seminar.fn_get_mobile_exhibitors'; //
+  static const String delegates = 'seminar.fn_get_mobile_delegates'; //
 }
 
-class ApiPages {
+class AppPageRoute {
+  static const String signIn = 'signIn';
+  static const String profile = 'profile';
+  static const String updatePassword = 'updatePassword';
+  static const String htmlContent = 'htmlContent';
+  static const String summaryCount = 'summaryCount';
+  static const String myAppointments = 'myAppointments';
+  static const String nearbyPlaces = 'nearbyPlaces';
+  static const String placesOfInterest = 'placesOfInterest';
+  static const String bookCab = 'bookCab';
+  static const String helpline = 'helpline';
+  static const String feedback = 'feedback';
+  static const String gallery = 'gallery';
+  static const String documents = 'documents';
+  static const String program = 'program';
+  static const String speakers = 'speakers';
+  static const String sponsors = 'sponsors';
+  static const String exhibitors = 'exhibitors';
+  static const String delegates = 'delegates';
+}
+
+class AppPageIds {
   static const int fromDgDesk = 59;
   static const int exhibition = 60;
   static const int registration = 62;

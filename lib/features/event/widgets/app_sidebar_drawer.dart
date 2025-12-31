@@ -89,7 +89,15 @@ class AppSidebarDrawer extends ConsumerWidget {
                     title: 'Profile',
                     onTap: () {
                       Navigator.pop(context);
-                      // Navigate to profile
+                      ScreenArgsModel screenArgsModel = ScreenArgsModel(
+                        routeName: AppPageRoute.profile,
+                        name: "Profile",
+                      );
+
+                      NavigationService.navigateTo(
+                        screenArgsModel.routeName,
+                        arguments: screenArgsModel,
+                      );
                     },
                   ),
                   _DrawerMenuItem(
@@ -98,7 +106,15 @@ class AppSidebarDrawer extends ConsumerWidget {
                     title: 'My Appointments',
                     onTap: () {
                       Navigator.pop(context);
-                      // Navigate to appointments
+                      ScreenArgsModel screenArgsModel = ScreenArgsModel(
+                        routeName: AppPageRoute.myAppointments,
+                        name: "My Appointments",
+                      );
+
+                      NavigationService.navigateTo(
+                        screenArgsModel.routeName,
+                        arguments: screenArgsModel,
+                      );
                     },
                   ),
                   _DrawerMenuItem(
@@ -107,7 +123,15 @@ class AppSidebarDrawer extends ConsumerWidget {
                     title: 'Nearby Places',
                     onTap: () {
                       Navigator.pop(context);
-                      // Navigate to nearby places
+                      ScreenArgsModel screenArgsModel = ScreenArgsModel(
+                        routeName: AppPageRoute.nearbyPlaces,
+                        name: "Nearby Places",
+                      );
+
+                      NavigationService.navigateTo(
+                        screenArgsModel.routeName,
+                        arguments: screenArgsModel,
+                      );
                     },
                   ),
                   _DrawerMenuItem(
@@ -116,7 +140,15 @@ class AppSidebarDrawer extends ConsumerWidget {
                     title: 'Places of Interest',
                     onTap: () {
                       Navigator.pop(context);
-                      // Navigate to places of interest
+                      ScreenArgsModel screenArgsModel = ScreenArgsModel(
+                        routeName: AppPageRoute.placesOfInterest,
+                        name: "Places of Interest",
+                      );
+
+                      NavigationService.navigateTo(
+                        screenArgsModel.routeName,
+                        arguments: screenArgsModel,
+                      );
                     },
                   ),
                   _DrawerMenuItem(
@@ -125,7 +157,15 @@ class AppSidebarDrawer extends ConsumerWidget {
                     title: 'Book Cab',
                     onTap: () {
                       Navigator.pop(context);
-                      // Navigate to cab booking
+                      ScreenArgsModel screenArgsModel = ScreenArgsModel(
+                        routeName: AppPageRoute.bookCab,
+                        name: "Book Cab",
+                      );
+
+                      NavigationService.navigateTo(
+                        screenArgsModel.routeName,
+                        arguments: screenArgsModel,
+                      );
                     },
                   ),
                   _DrawerMenuItem(
@@ -134,7 +174,15 @@ class AppSidebarDrawer extends ConsumerWidget {
                     title: 'Helpline',
                     onTap: () {
                       Navigator.pop(context);
-                      // Navigate to helpline
+                      ScreenArgsModel screenArgsModel = ScreenArgsModel(
+                        routeName: AppPageRoute.helpline,
+                        name: "Helpline",
+                      );
+
+                      NavigationService.navigateTo(
+                        screenArgsModel.routeName,
+                        arguments: screenArgsModel,
+                      );
                     },
                   ),
                   _DrawerMenuItem(
@@ -144,7 +192,7 @@ class AppSidebarDrawer extends ConsumerWidget {
                     onTap: () {
                       Navigator.pop(context);
                       ScreenArgsModel screenArgsModel = ScreenArgsModel(
-                        routeName: "feedback",
+                        routeName: AppPageRoute.feedback,
                         name: "Feedback",
                       );
 
@@ -163,7 +211,7 @@ class AppSidebarDrawer extends ConsumerWidget {
                       ScreenArgsModel screenArgsModel = ScreenArgsModel(
                         routeName: "webview",
                         name: "FAQs",
-                        data: {"page_id": ApiPages.faqs},
+                        data: {"page_id": AppPageIds.faqs},
                       );
 
                       NavigationService.navigateTo(

@@ -19,7 +19,7 @@ class InfoCardsSection extends StatelessWidget {
               ScreenArgsModel screenArgsModel = ScreenArgsModel(
                 routeName: "webview",
                 name: "About FAI",
-                data: {"page_id": ApiPages.aboutFai},
+                data: {"page_id": AppPageIds.aboutFai},
               );
 
               NavigationService.navigateTo(
@@ -39,7 +39,7 @@ class InfoCardsSection extends StatelessWidget {
               ScreenArgsModel screenArgsModel = ScreenArgsModel(
                 routeName: "webview",
                 name: "Theme & Highlights",
-                data: {"page_id": ApiPages.seminarTheme},
+                data: {"page_id": AppPageIds.seminarTheme},
               );
 
               NavigationService.navigateTo(
