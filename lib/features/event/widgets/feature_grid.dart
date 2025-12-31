@@ -23,10 +23,10 @@ class FeatureGrid extends StatelessWidget {
           gradientColors: const [Color(0xFF06B6D4), Color(0xFF2563EB)],
           onTap: () {
             ScreenArgsModel screenArgsModel = ScreenArgsModel(
-              routeName: AppPageRoute.program, 
+              routeName: AppPageRoute.program,
               name: "Program",
-              data: {},
             );
+
             NavigationService.navigateTo(
               screenArgsModel.routeName,
               arguments: screenArgsModel,
@@ -42,7 +42,7 @@ class FeatureGrid extends StatelessWidget {
           gradientColors: const [Color(0xFF9333EA), Color(0xFFEC4899)],
           onTap: () {
             ScreenArgsModel screenArgsModel = ScreenArgsModel(
-              routeName: AppPageRoute.speakers, 
+              routeName: AppPageRoute.speakers,
               name: "Speakers",
               data: {},
             );
@@ -107,7 +107,7 @@ class FeatureGrid extends StatelessWidget {
             ScreenArgsModel screenArgsModel = ScreenArgsModel(
               routeName: "webview",
               name: "Registrations",
-              data: {"page_id": AppPageIds.registration}, 
+              data: {"page_id": AppPageIds.registration},
             );
             NavigationService.navigateTo(
               screenArgsModel.routeName,

@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../common/models/response_message_model.dart';
 import '../models/current_user.dart';
 import '../services/auth_service.dart';
 
@@ -19,6 +20,11 @@ class AuthNotifier extends StateNotifier<CurrentUser?> {
     state = await ref.read(authServiceProvider).getCurrentUser();
   }
 }
+
+final profileProvider = FutureProvider<ResponseMessageModel>((ref) async {
+  final service = ref.watch(authServiceProvider);
+  return await service.getProfile();
+});
 
 /// 👤 User Profile Provider (derived from CurrentUser)
 final userProfileProvider = Provider<Map<String, dynamic>?>((ref) {

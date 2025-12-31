@@ -41,7 +41,6 @@ final eventSummaryCountProvider = FutureProvider<ResponseMessageModel>((
   ref,
 ) async {
   final service = ref.watch(eventServiceProvider);
-  print("eventSummaryCountProvider: calling getSummaryCount");
   return await service.getSummaryCount();
 });
 

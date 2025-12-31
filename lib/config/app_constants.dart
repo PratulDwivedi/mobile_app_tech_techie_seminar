@@ -23,11 +23,10 @@ class ApiRoutes {
 }
 
 class AppPageRoute {
+  static const String webview = 'webview';
   static const String signIn = 'signIn';
   static const String profile = 'profile';
   static const String updatePassword = 'updatePassword';
-  static const String htmlContent = 'htmlContent';
-  static const String summaryCount = 'summaryCount';
   static const String myAppointments = 'myAppointments';
   static const String nearbyPlaces = 'nearbyPlaces';
   static const String placesOfInterest = 'placesOfInterest';

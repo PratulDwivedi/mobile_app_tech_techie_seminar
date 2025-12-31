@@ -4,16 +4,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../common/widgets/common_gradient_header_widget.dart';
 import '../../auth/providers/auth_service_provider.dart';
 
-class ProgramScreen extends ConsumerStatefulWidget {
+class SponsorsScreen extends ConsumerStatefulWidget {
   final ScreenArgsModel args;
 
-  const ProgramScreen({required this.args, super.key});
+  const SponsorsScreen({required this.args, super.key});
 
   @override
-  ConsumerState<ProgramScreen> createState() => _ProgramScreenState();
+  ConsumerState<SponsorsScreen> createState() => _SponsorsScreenState();
 }
 
-class _ProgramScreenState extends ConsumerState<ProgramScreen> {
+class _SponsorsScreenState extends ConsumerState<SponsorsScreen> {
   @override
   void initState() {
     super.initState();

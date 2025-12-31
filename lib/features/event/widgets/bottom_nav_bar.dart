@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../config/app_constants.dart';
+import '../../common/models/screen_args_model.dart';
+import '../../common/services/navigation_service.dart';
 import '../providers/event_service_provider.dart';
 
 class BottomNavBar extends ConsumerWidget {
@@ -25,20 +28,50 @@ class BottomNavBar extends ConsumerWidget {
                 icon: Icons.calendar_today,
                 label: 'Program',
                 isActive: activeTab == 0,
-                onTap: () => ref.read(activeTabProvider.notifier).state = 0,
+                onTap: () {
+                  ScreenArgsModel screenArgsModel = ScreenArgsModel(
+                    routeName: AppPageRoute.program,
+                    name: "Program",
+                    data: {},
+                  );
+                  NavigationService.navigateTo(
+                    screenArgsModel.routeName,
+                    arguments: screenArgsModel,
+                  );
+                },
               ),
               _NavItem(
                 icon: Icons.person,
                 label: 'Delegates',
                 isActive: activeTab == 1,
-                onTap: () => ref.read(activeTabProvider.notifier).state = 1,
+                onTap: () {
+                  ScreenArgsModel screenArgsModel = ScreenArgsModel(
+                    routeName: AppPageRoute.delegates,
+                    name: "Delegates",
+                    data: {},
+                  );
+                  NavigationService.navigateTo(
+                    screenArgsModel.routeName,
+                    arguments: screenArgsModel,
+                  );
+                },
               ),
 
               _NavItem(
                 icon: Icons.card_membership,
                 label: 'Exhibitors',
                 isActive: activeTab == 4,
-                onTap: () => ref.read(activeTabProvider.notifier).state = 2,
+                onTap: () {
+                  ScreenArgsModel screenArgsModel = ScreenArgsModel(
+                    routeName: AppPageRoute.exhibitors,
+                    name: "Exhibitors",
+                    data: {},
+                  );
+                  NavigationService.navigateTo(
+                    screenArgsModel.routeName,
+                    arguments: screenArgsModel,
+                  );
+                },
               ),
             ],
           ),

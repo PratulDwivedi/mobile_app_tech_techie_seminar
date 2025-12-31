@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app_tech_techie_seminar/features/auth/screens/login_screen.dart';
+import '../../../config/app_constants.dart';
+import '../../auth/screens/login_screen.dart';
+import '../../event/screens/delegates_screen.dart';
+import '../../event/screens/documents_screen.dart';
+import '../../event/screens/exhibitors_screen.dart';
+import '../../event/screens/gallery_screen.dart';
+import '../../event/screens/program_screen.dart';
 import '../../event/screens/seminar_home_screen.dart';
+import '../../event/screens/speakers_screen.dart';
+import '../../event/screens/sponsors_screen.dart';
 import '../models/screen_args_model.dart';
+import '../screens/book_cab_screen.dart';
 import '../screens/chat_screen.dart';
+import '../screens/feedback_screen.dart';
+import '../screens/help_line_screen.dart';
+import '../screens/my_appointments_screen.dart';
+import '../screens/nearby_places_screen.dart';
+import '../screens/places_of_interest_screen.dart';
+import '../screens/profile_screen.dart';
 import '../screens/web_view_screen.dart';
 
 class NavigationService {
@@ -31,10 +46,103 @@ class NavigationService {
       } else {
         args = ScreenArgsModel(routeName: routeName, name: routeName);
       }
-      if (routeName == "webview") {
-        navigatorKey.currentState?.push(
-          MaterialPageRoute(builder: (context) => WebViewScreen(args: args)),
-        );
+
+      switch (routeName) {
+        case AppPageRoute.webview:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(builder: (context) => WebViewScreen(args: args)),
+          );
+          break;
+        case AppPageRoute.profile:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(builder: (context) => ProfileScreen(args: args)),
+          );
+          break;
+        case AppPageRoute.updatePassword:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(builder: (context) => ProfileScreen(args: args)),
+          );
+          break;
+        case AppPageRoute.myAppointments:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(
+              builder: (context) => MyAppointmentsScreen(args: args),
+            ),
+          );
+          break;
+        case AppPageRoute.nearbyPlaces:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(
+              builder: (context) => NearbyPlacesScreen(args: args),
+            ),
+          );
+          break;
+        case AppPageRoute.placesOfInterest:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(
+              builder: (context) => PlacesOfInterestScreen(args: args),
+            ),
+          );
+          break;
+        case AppPageRoute.bookCab:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(builder: (context) => BookCabScreen(args: args)),
+          );
+          break;
+        case AppPageRoute.helpline:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(builder: (context) => HelpLineScreen(args: args)),
+          );
+          break;
+        case AppPageRoute.feedback:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(builder: (context) => FeedbackScreen(args: args)),
+          );
+          break;
+        case AppPageRoute.gallery:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(builder: (context) => GalleryScreen(args: args)),
+          );
+          break;
+        case AppPageRoute.documents:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(
+              builder: (context) => DocumentsScreen(args: args),
+            ),
+          );
+          break;
+        case AppPageRoute.program:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(builder: (context) => ProgramScreen(args: args)),
+          );
+          break;
+        case AppPageRoute.speakers:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(builder: (context) => SpeakersScreen(args: args)),
+          );
+          break;
+        case AppPageRoute.sponsors:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(builder: (context) => SponsorsScreen(args: args)),
+          );
+          break;
+        case AppPageRoute.exhibitors:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(
+              builder: (context) => ExhibitorsScreen(args: args),
+            ),
+          );
+          break;
+        case AppPageRoute.delegates:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(
+              builder: (context) => DelegatesScreen(args: args),
+            ),
+          );
+          break;
+        default:
+          // Handle unknown routes or do nothing
+          break;
       }
     }
   }

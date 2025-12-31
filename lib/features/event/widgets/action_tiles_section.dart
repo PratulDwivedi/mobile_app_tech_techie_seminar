@@ -58,13 +58,14 @@ class ActionTilesSection extends StatelessWidget {
           badge: '250+ Photos',
           gradientColors: [Color(0xFFEC4899), Color(0xFFF43F5E)],
           onTap: () {
+            ScreenArgsModel screenArgsModel = ScreenArgsModel(
+              routeName: AppPageRoute.gallery,
+              name: "Gallery",
+            );
+
             NavigationService.navigateTo(
-              ApiRoutes.gallery,
-              arguments: ScreenArgsModel(
-                routeName: AppPageRoute.gallery,
-                name: "Gallery",
-                data: {},
-              ),
+              screenArgsModel.routeName,
+              arguments: screenArgsModel,
             );
           },
         ),
@@ -77,13 +78,14 @@ class ActionTilesSection extends StatelessWidget {
           badge: '15 Files',
           gradientColors: [Color(0xFF14B8A6), Color(0xFF06B6D4)],
           onTap: () {
+            ScreenArgsModel screenArgsModel = ScreenArgsModel(
+              routeName: AppPageRoute.documents,
+              name: "Documents",
+            );
+
             NavigationService.navigateTo(
-              ApiRoutes.documents,
-              arguments: ScreenArgsModel(
-                routeName: AppPageRoute.documents,
-                name: "Resources",
-                data: {},
-              ),
+              screenArgsModel.routeName,
+              arguments: screenArgsModel,
             );
           },
         ),
