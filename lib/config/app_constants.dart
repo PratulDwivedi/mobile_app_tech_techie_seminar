@@ -6,13 +6,13 @@ class ApiRoutes {
 }
 
 class ApiPages {
-  static const String fromDgDesk = '59';
-  static const String exhibition = '60';
-  static const String registration = '62';
-  static const String aboutFai = '63';
-  static const String registrationForms = '151';
-  static const String seminarTheme = '220';
-  static const String conferenceHotel = '222';
-  static const String culturalProgramme = '237';
-  static const String faqs = '249';
+  static const int fromDgDesk = 59;
+  static const int exhibition = 60;
+  static const int registration = 62;
+  static const int aboutFai = 63;
+  static const int registrationForms = 151;
+  static const int seminarTheme = 220;
+  static const int conferenceHotel = 222;
+  static const int culturalProgramme = 237;
+  static const int faqs = 249;
 }
