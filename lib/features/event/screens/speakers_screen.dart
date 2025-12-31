@@ -60,9 +60,8 @@ class _SpeakersScreenState extends ConsumerState<SpeakersScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SpeakerInfoScreen(
-                              speaker: speaker,
-                            ),
+                            builder: (context) =>
+                                SpeakerInfoScreen(speaker: speaker),
                           ),
                         );
                       },
@@ -86,19 +85,20 @@ class SpeakerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final speakerName = speaker['speaker_name']?.toString() ?? 'Unknown Speaker';
+    final speakerName =
+        speaker['speaker_name']?.toString() ?? 'Unknown Speaker';
     final designation = speaker['designation']?.toString() ?? '';
     final profilePic = speaker['profile_pic']?.toString();
     final biography = speaker['biography']?.toString() ?? '';
-    final presentingAt = speaker['theme_date']?.toString() ?? '';
+    final abstract_paper_title =
+        speaker['abstract_paper_title']?.toString() ?? '';
+    final themeDate = speaker['theme_date']?.toString() ?? '';
     final companyName = speaker['company_name']?.toString() ?? '';
 
     return Card(
       margin: const EdgeInsets.only(bottom: 16.0),
       elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -160,7 +160,7 @@ class SpeakerCard extends StatelessWidget {
             ),
 
             // Presenting Information
-            if (presentingAt.isNotEmpty) ...[
+            if (themeDate.isNotEmpty) ...[
               const SizedBox(height: 12),
               Container(
                 padding: const EdgeInsets.all(8),
@@ -168,23 +168,41 @@ class SpeakerCard extends StatelessWidget {
                   color: const Color(0xFF4CAF50).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Row(
+                child: Column(
                   children: [
-                    const Icon(
-                      Icons.event,
-                      size: 16,
-                      color: Color(0xFF4CAF50),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        _stripHtmlTags(presentingAt),
-                        style: const TextStyle(
-                          fontSize: 12,
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.event,
+                          size: 16,
                           color: Color(0xFF4CAF50),
-                          fontWeight: FontWeight.w500,
                         ),
-                      ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            themeDate,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Color(0xFF4CAF50),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            abstract_paper_title,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Color(0xFF4CAF50),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -218,10 +236,5 @@ class SpeakerCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String _stripHtmlTags(String htmlText) {
-    // Simple HTML tag removal for presenting_at field
-    return htmlText.replaceAll(RegExp(r'<[^>]*>'), '').trim();
   }
 }

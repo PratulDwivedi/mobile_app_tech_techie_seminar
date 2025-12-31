@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import '../../common/widgets/widget_utils.dart';
 import '../../common/widgets/common_gradient_header_widget.dart';
 
 class SpeakerInfoScreen extends StatelessWidget {
@@ -92,7 +94,7 @@ class SpeakerInfoScreen extends StatelessWidget {
                     _buildInfoCard(
                       'Presentation Details',
                       [
-                        _buildInfoRow('Presenting At', _stripHtmlTags(presentingAt)),
+                        WidgetUtils.buildHtmlInfoRow('Presenting At', presentingAt),
                         if (abstractPaperTitle.isNotEmpty)
                           _buildInfoRow('Paper Title', abstractPaperTitle),
                       ],
@@ -213,10 +215,5 @@ class SpeakerInfoScreen extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String _stripHtmlTags(String htmlText) {
-    // Simple HTML tag removal
-    return htmlText.replaceAll(RegExp(r'<[^>]*>'), '').trim();
   }
 }
