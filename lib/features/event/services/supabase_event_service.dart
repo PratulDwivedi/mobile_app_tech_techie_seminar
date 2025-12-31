@@ -24,7 +24,6 @@ class SupabaseEventService implements EventService {
 
   @override
   Future<ResponseMessageModel> getHtmlContent(int pageId) async {
-
     final response = await SupabaseApiHelper.post(ApiRoutes.htmlContent, {
       "p_page_id": pageId,
     });
@@ -35,6 +34,12 @@ class SupabaseEventService implements EventService {
   @override
   Future<ResponseMessageModel> getSummaryCount() async {
     final response = await SupabaseApiHelper.post(ApiRoutes.summaryCount, null);
+    return response;
+  }
+
+  @override
+  Future<ResponseMessageModel> getSpeakers() async {
+    final response = await SupabaseApiHelper.post(ApiRoutes.speakers, null);
     return response;
   }
 }

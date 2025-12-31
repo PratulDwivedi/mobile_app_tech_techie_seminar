@@ -2,7 +2,8 @@ import '../../common/models/screen_args_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../common/widgets/common_gradient_header_widget.dart';
-import '../../auth/providers/auth_service_provider.dart';
+import '../providers/event_service_provider.dart';
+import 'speaker_info_screen.dart';
 
 class SpeakersScreen extends ConsumerStatefulWidget {
   final ScreenArgsModel args;
@@ -21,7 +22,7 @@ class _SpeakersScreenState extends ConsumerState<SpeakersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final profileAsync = ref.watch(profileProvider);
+    final speakersAsync = ref.watch(speakersProvider);
     return Scaffold(
       body: Column(
         children: [
@@ -29,29 +30,45 @@ class _SpeakersScreenState extends ConsumerState<SpeakersScreen> {
           CommonGradientHeader(
             title: widget.args.name,
             onRefresh: () {
-              ref.invalidate(profileProvider);
+              ref.invalidate(programSpeakerWiseProvider);
             },
           ),
 
-          // Profile Content
+          // Speakers Content
           Expanded(
-            child: profileAsync.when(
+            child: speakersAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (err, _) => Center(child: Text('Error: $err')),
               data: (response) {
                 if (!response.isSuccess) {
                   return Center(child: Text(response.message));
                 }
-                final data = response.data;
 
-                return Padding(
+                final speakersData = (response.data as List?) ?? [];
+
+                if (speakersData.isEmpty) {
+                  return const Center(child: Text('No speakers available'));
+                }
+
+                return ListView.builder(
                   padding: const EdgeInsets.all(16.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [Container()],
-                    ),
-                  ),
+                  itemCount: speakersData.length,
+                  itemBuilder: (context, index) {
+                    final speaker = speakersData[index] as Map<String, dynamic>;
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SpeakerInfoScreen(
+                              speaker: speaker,
+                            ),
+                          ),
+                        );
+                      },
+                      child: SpeakerCard(speaker: speaker),
+                    );
+                  },
                 );
               },
             ),
@@ -59,5 +76,152 @@ class _SpeakersScreenState extends ConsumerState<SpeakersScreen> {
         ],
       ),
     );
+  }
+}
+
+class SpeakerCard extends StatelessWidget {
+  final Map<String, dynamic> speaker;
+
+  const SpeakerCard({super.key, required this.speaker});
+
+  @override
+  Widget build(BuildContext context) {
+    final speakerName = speaker['speaker_name']?.toString() ?? 'Unknown Speaker';
+    final designation = speaker['designation']?.toString() ?? '';
+    final profilePic = speaker['profile_pic']?.toString();
+    final biography = speaker['biography']?.toString() ?? '';
+    final presentingAt = speaker['theme_date']?.toString() ?? '';
+    final companyName = speaker['company_name']?.toString() ?? '';
+
+    return Card(
+      margin: const EdgeInsets.only(bottom: 16.0),
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Speaker Header with Photo and Basic Info
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Profile Picture
+                CircleAvatar(
+                  radius: 40,
+                  backgroundImage: profilePic != null
+                      ? NetworkImage('https://your-api-base-url/$profilePic')
+                      : null,
+                  child: profilePic == null
+                      ? const Icon(Icons.person, size: 40)
+                      : null,
+                ),
+                const SizedBox(width: 16),
+                // Speaker Details
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        speakerName,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF2E7D32),
+                        ),
+                      ),
+                      if (designation.isNotEmpty) ...[
+                        const SizedBox(height: 4),
+                        Text(
+                          designation,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFF666666),
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      ],
+                      if (companyName.isNotEmpty) ...[
+                        const SizedBox(height: 2),
+                        Text(
+                          companyName,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Color(0xFF888888),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              ],
+            ),
+
+            // Presenting Information
+            if (presentingAt.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF4CAF50).withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.event,
+                      size: 16,
+                      color: Color(0xFF4CAF50),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        _stripHtmlTags(presentingAt),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFF4CAF50),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+
+            // Biography
+            if (biography.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              const Text(
+                'Biography',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF333333),
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                biography,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Color(0xFF666666),
+                  height: 1.4,
+                ),
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  String _stripHtmlTags(String htmlText) {
+    // Simple HTML tag removal for presenting_at field
+    return htmlText.replaceAll(RegExp(r'<[^>]*>'), '').trim();
   }
 }

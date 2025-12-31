@@ -16,7 +16,7 @@ class ApiRoutes {
   static const String gallery = 'seminar.fn_get_mobile_gallery'; //
   static const String documents = 'seminar.fn_get_mobile_documents'; //
   static const String program = 'seminar.fn_get_mobile_program'; //
-  static const String speakers = 'seminar.fn_get_mobile_speakers'; //
+  static const String speakers = 'seminar.fn_get_mobile_speakers'; 
   static const String sponsors = 'seminar.fn_get_mobile_sponsors'; //
   static const String exhibitors = 'seminar.fn_get_mobile_exhibitors'; //
   static const String delegates = 'seminar.fn_get_mobile_delegates'; //
