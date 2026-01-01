@@ -1,4 +1,4 @@
-package com.example.mobile_app_tech_techie_seminar
+package org.faidelhi.seminar
 
 import io.flutter.embedding.android.FlutterActivity
 

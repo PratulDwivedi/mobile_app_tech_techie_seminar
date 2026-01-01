@@ -1,0 +1,6 @@
+<resources>
+    <string name="GOOGLE_MAP_API">AIzaSyBLnlcX0g7SdB3byENSSf2iZHuP2VghJoE</string>
+    <string name="GOOGLE_NEARBYPLACE_API">AIzaSyDTZ1a3SJPjz5CubPjPWiMJjjTqvh1TEbk</string>
+    <string name="PROJECT_NUMBER">939513371975</string>
+    <string name="pdfload_url">https://docs.google.com/viewerng/viewer?url=</string>
+</resources>
