@@ -17,7 +17,7 @@ class FeatureGrid extends StatelessWidget {
       children: [
         // Program Card
         FeatureCard(
-          icon: Icons.calendar_today,
+          icon: getPageIcon('program'),
           title: 'Program',
           subtitle: 'Day & Session wise',
           gradientColors: const [Color(0xFF06B6D4), Color(0xFF2563EB)],
@@ -36,7 +36,7 @@ class FeatureGrid extends StatelessWidget {
 
         // Speakers Card
         FeatureCard(
-          icon: Icons.mic,
+          icon: getPageIcon('speaker'),
           title: 'Speakers',
           subtitle: 'Expert lineup',
           gradientColors: const [Color(0xFF9333EA), Color(0xFFEC4899)],
@@ -55,7 +55,7 @@ class FeatureGrid extends StatelessWidget {
 
         // Sponsors Card
         FeatureCard(
-          icon: Icons.speaker_notes,
+          icon: getPageIcon('sponsor'),
           title: 'Sponsors',
           subtitle: 'Connect & chat',
           gradientColors: const [
@@ -77,7 +77,7 @@ class FeatureGrid extends StatelessWidget {
 
         // Exhibitors Card
         FeatureCard(
-          icon: Icons.card_membership,
+          icon: getPageIcon('exhibitor'),
           title: 'Exhibitors',
           subtitle: 'Visit exhibitor stalls',
           gradientColors: const [Color(0xFFF97316), Color(0xFFEF4444)],
@@ -96,7 +96,7 @@ class FeatureGrid extends StatelessWidget {
 
         // Registrations Card
         FeatureCard(
-          icon: Icons.receipt,
+          icon: getPageIcon('registration'),
           title: 'Registrations',
           subtitle: 'Registrations and fees',
           gradientColors: const [
@@ -118,7 +118,7 @@ class FeatureGrid extends StatelessWidget {
 
         // Delegates Card
         FeatureCard(
-          icon: Icons.person,
+          icon: getPageIcon('delegate'),
           title: 'Delegates',
           subtitle: 'Delegate information',
           gradientColors: const [

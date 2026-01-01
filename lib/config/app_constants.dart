@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class ApiRoutes {
   static const String signIn = 'seminar.fn_signin_mobile_delegate';
@@ -18,10 +18,10 @@ class ApiRoutes {
   static const String gallery = 'seminar.fn_get_mobile_gallery'; //
   static const String documents = 'seminar.fn_get_mobile_documents'; //
   static const String program = 'seminar.fn_get_mobile_program'; //
-  static const String speakers = 'seminar.fn_get_mobile_speakers'; 
-  static const String sponsors = 'seminar.fn_get_mobile_sponsors'; 
+  static const String speakers = 'seminar.fn_get_mobile_speakers';
+  static const String sponsors = 'seminar.fn_get_mobile_sponsors';
   static const String exhibitors = 'seminar.fn_get_mobile_exhibitors';
-  static const String delegates = 'seminar.fn_get_mobile_delegates'; 
+  static const String delegates = 'seminar.fn_get_mobile_delegates';
 }
 
 class AppPageRoute {
@@ -56,6 +56,46 @@ class AppPageIds {
   static const int faqs = 249;
 }
 
-// Map<String, Widget> pageIcons = {
-//   'exhibition': Icons.museum,
-// };
+Map<String, IconData> pageIcons = {
+  // Main Navigation Pages
+  'program': Icons.calendar_today,
+  'speaker': Icons.mic,
+  'sponsor': Icons.speaker_notes,
+  'exhibitor': Icons.card_membership,
+  'delegate': Icons.people,
+  'exhibition': Icons.museum,
+  'culturalProgram': Icons.music_note,
+  'gallery': Icons.photo_library,
+  'document': Icons.download,
+  'resource': Icons.download,
+  'registration': Icons.receipt,
+
+  // Bottom Navigation
+  'profile': Icons.person,
+
+  // Auth & Account
+  'signIn': Icons.login,
+  'updatePassword': Icons.lock,
+
+  // Services & Features
+  'myAppointment': Icons.schedule,
+  'nearbyPlace': Icons.location_on,
+  'placesOfInterest': Icons.explore,
+  'bookCab': Icons.directions_car,
+  'helpline': Icons.phone,
+  'feedback': Icons.feedback,
+
+  // Content Pages
+  'aboutFai': Icons.business,
+  'seminarTheme': Icons.lightbulb,
+  'conferenceHotel': Icons.hotel,
+  'faq': Icons.help,
+
+  // Webview pages (using generic web icon)
+  'webview': Icons.web,
+};
+
+// Helper function to get page icon
+IconData getPageIcon(String pageKey) {
+  return pageIcons[pageKey] ?? Icons.info;
+}

@@ -11,7 +11,7 @@ class ActionTilesSection extends StatelessWidget {
     return Column(
       children: [
         ActionTile(
-          icon: Icons.museum,
+          icon: getPageIcon('exhibition'),
           title: 'Exhibition',
           subtitle: 'Exhibition Details',
           badge: '250+ Photos',
@@ -33,7 +33,7 @@ class ActionTilesSection extends StatelessWidget {
         const SizedBox(height: 12),
 
         ActionTile(
-          icon: Icons.music_note,
+          icon: getPageIcon('culturalProgram'),
           title: 'Cultural Program',
           subtitle: 'Cultural Program Details',
           badge: 'Scan to enter',
@@ -52,7 +52,7 @@ class ActionTilesSection extends StatelessWidget {
         const SizedBox(height: 12),
 
         ActionTile(
-          icon: Icons.photo_library,
+          icon: getPageIcon('gallery'),
           title: 'Gallery',
           subtitle: 'Photos & videos',
           badge: '250+ Photos',
@@ -72,7 +72,7 @@ class ActionTilesSection extends StatelessWidget {
         const SizedBox(height: 12),
 
         ActionTile(
-          icon: Icons.download,
+          icon: getPageIcon('document'),
           title: 'Resources',
           subtitle: 'Presentations & documents',
           badge: '15 Files',

@@ -1,3 +1,6 @@
+import 'package:mobile_app_tech_techie_seminar/config/app_config.dart';
+
+import '../../../config/app_constants.dart';
 import '../models/screen_args_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -58,21 +61,21 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         const SizedBox(height: 20),
-                        
+
                         // Profile Picture
                         if (profileData['profile_pic'] != null)
                           Center(
                             child: CircleAvatar(
                               radius: 50,
                               backgroundImage: NetworkImage(
-                                'https://your-api-base-url/${profileData['profile_pic']}', // Replace with actual base URL
+                                '${appConfig.apiBaseUrl}/${profileData['profile_pic']}', // Replace with actual base URL
                               ),
-                              child: const Icon(Icons.person, size: 50),
+                              child: Icon(getPageIcon('profile'), size: 50),
                             ),
                           ),
-                        
+
                         const SizedBox(height: 20),
-                        
+
                         // Display profile fields
                         _buildProfileField(
                           'Title',

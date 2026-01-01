@@ -133,7 +133,7 @@ class AppSidebarDrawer extends ConsumerWidget {
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 children: [
                   _DrawerMenuItem(
-                    icon: Icons.person_outline,
+                    icon: getPageIcon('profile'),
                     iconColor: const Color(0xFFFF6B6B),
                     title: 'Profile',
                     onTap: () {
@@ -150,7 +150,7 @@ class AppSidebarDrawer extends ConsumerWidget {
                     },
                   ),
                   _DrawerMenuItem(
-                    icon: Icons.calendar_today_outlined,
+                    icon: getPageIcon('myAppointment'),
                     iconColor: const Color(0xFFFF9800),
                     title: 'My Appointments',
                     onTap: () {
@@ -167,7 +167,7 @@ class AppSidebarDrawer extends ConsumerWidget {
                     },
                   ),
                   _DrawerMenuItem(
-                    icon: Icons.map_outlined,
+                    icon: getPageIcon('nearbyPlace'),
                     iconColor: const Color(0xFF00BCD4),
                     title: 'Nearby Places',
                     onTap: () {
@@ -184,7 +184,7 @@ class AppSidebarDrawer extends ConsumerWidget {
                     },
                   ),
                   _DrawerMenuItem(
-                    icon: Icons.place_outlined,
+                    icon: getPageIcon('placeOfInterest'),
                     iconColor: const Color(0xFFFF9800),
                     title: 'Places of Interest',
                     onTap: () {
@@ -201,7 +201,7 @@ class AppSidebarDrawer extends ConsumerWidget {
                     },
                   ),
                   _DrawerMenuItem(
-                    icon: Icons.local_taxi_outlined,
+                    icon: getPageIcon('bookCab'),
                     iconColor: const Color(0xFFE91E63),
                     title: 'Book Cab',
                     onTap: () {
@@ -218,7 +218,7 @@ class AppSidebarDrawer extends ConsumerWidget {
                     },
                   ),
                   _DrawerMenuItem(
-                    icon: Icons.phone_outlined,
+                    icon: getPageIcon('helpline'),
                     iconColor: const Color(0xFFFFC107),
                     title: 'Helpline',
                     onTap: () {
@@ -235,7 +235,7 @@ class AppSidebarDrawer extends ConsumerWidget {
                     },
                   ),
                   _DrawerMenuItem(
-                    icon: Icons.star_outline,
+                    icon: getPageIcon('feedback'),
                     iconColor: const Color(0xFF8BC34A),
                     title: 'Feedback',
                     onTap: () {
@@ -252,7 +252,7 @@ class AppSidebarDrawer extends ConsumerWidget {
                     },
                   ),
                   _DrawerMenuItem(
-                    icon: Icons.help_outline,
+                    icon: getPageIcon('faq'),
                     iconColor: const Color(0xFFFFA726),
                     title: 'FAQs',
                     onTap: () {

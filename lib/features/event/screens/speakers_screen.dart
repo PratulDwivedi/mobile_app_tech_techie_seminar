@@ -1,3 +1,5 @@
+import 'package:mobile_app_tech_techie_seminar/config/app_constants.dart';
+
 import '../../../config/app_config.dart';
 import '../../common/models/screen_args_model.dart';
 import 'package:flutter/material.dart';
@@ -114,9 +116,7 @@ class SpeakerCard extends StatelessWidget {
                   backgroundImage: profilePic != null
                       ? NetworkImage('${appConfig.apiBaseUrl}/$profilePic')
                       : null,
-                  child: profilePic == null
-                      ? const Icon(Icons.person, size: 40)
-                      : null,
+                  child: Icon(getPageIcon('speaker'), size: 40),
                 ),
                 const SizedBox(width: 16),
                 // Speaker Details

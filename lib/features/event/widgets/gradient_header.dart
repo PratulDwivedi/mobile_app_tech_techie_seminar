@@ -8,7 +8,6 @@ class GradientHeader extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final summaryAsync = ref.watch(eventSummaryCountProvider);
 
     // Extract notification count from summary data
@@ -118,16 +117,6 @@ class GradientHeader extends ConsumerWidget {
                                 ),
                               ),
                           ],
-                        ),
-                        const SizedBox(width: 8),
-                        IconButton(
-                          onPressed: () {
-                            // Navigate to search
-                          },
-                          icon: const Icon(Icons.search, color: Colors.white),
-                          style: IconButton.styleFrom(
-                            backgroundColor: Colors.white.withOpacity(0.2),
-                          ),
                         ),
                         const SizedBox(width: 8),
                         IconButton(

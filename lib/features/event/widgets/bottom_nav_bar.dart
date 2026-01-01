@@ -22,7 +22,7 @@ class BottomNavBar extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _NavItem(
-                icon: Icons.person,
+                icon: getPageIcon('delegate'),
                 label: 'Delegates',
                 isActive: false,
                 onTap: () {
@@ -38,7 +38,7 @@ class BottomNavBar extends ConsumerWidget {
                 },
               ),
               _NavItem(
-                icon: Icons.calendar_today,
+                icon: getPageIcon('program'),
                 label: 'Program',
                 isActive: true,
                 onTap: () {
@@ -54,7 +54,7 @@ class BottomNavBar extends ConsumerWidget {
                 },
               ),
               _NavItem(
-                icon: Icons.card_membership,
+                icon: getPageIcon('exhibitor'),
                 label: 'Exhibitors',
                 isActive: false,
                 onTap: () {

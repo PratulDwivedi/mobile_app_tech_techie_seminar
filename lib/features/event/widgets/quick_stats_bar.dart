@@ -21,8 +21,8 @@ class QuickStatsBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           StatItem(
-            icon: Icons.people,
-            value: stats['delegates'] ?? 0, // ✅
+            icon: getPageIcon('delegate'),
+            value: stats['delegates'] ?? 0, 
             label: 'Delegates',
             onTap: () {
               final screenArgs = ScreenArgsModel(
@@ -37,8 +37,8 @@ class QuickStatsBar extends StatelessWidget {
           ),
           _divider(context),
           StatItem(
-            icon: Icons.mic,
-            value: stats['speakers'] ?? 0, // ✅ FIXED
+            icon: getPageIcon('speaker'),
+            value: stats['speakers'] ?? 0, 
             label: 'Speakers',
             onTap: () {
               final screenArgs = ScreenArgsModel(
@@ -53,8 +53,8 @@ class QuickStatsBar extends StatelessWidget {
           ),
           _divider(context),
           StatItem(
-            icon: Icons.shop,
-            value: stats['exhibitors'] ?? 0, // ✅ FIXED
+            icon: getPageIcon('exhibitor'),
+            value: stats['exhibitors'] ?? 0, 
             label: 'Exhibitors',
             onTap: () {
               final screenArgs = ScreenArgsModel(
@@ -116,7 +116,10 @@ class StatItem extends StatelessWidget {
             ),
             Text(
               label,
-              style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 12),
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.8),
+                fontSize: 12,
+              ),
             ),
           ],
         ),
