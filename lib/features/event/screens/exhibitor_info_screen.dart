@@ -17,9 +17,7 @@ class ExhibitorInfoScreen extends StatelessWidget {
       body: Column(
         children: [
           // Gradient Header
-          CommonGradientHeader(
-            title: exhibitor.exhibitorName,
-          ),
+          CommonGradientHeader(title: exhibitor.exhibitorName),
 
           // Exhibitor Detailed Content
           Expanded(
@@ -39,26 +37,21 @@ class ExhibitorInfoScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12.0),
                             color: Colors.grey[200],
                           ),
-                          child: exhibitor.filePath != null
-                              ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  child: Image.network(
-                                    '${appConfig.apiBaseUrl}/${exhibitor.filePath}',
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return const Icon(
-                                        Icons.business,
-                                        size: 60,
-                                        color: Colors.grey,
-                                      );
-                                    },
-                                  ),
-                                )
-                              : const Icon(
-                                  Icons.business,
-                                  size: 60,
-                                  color: Colors.grey,
+                          child: Container(
+                            width: 80,
+                            height: 80,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                12,
+                              ), // Adjust radius as needed
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  '${appConfig.storageUrl}/${exhibitor.filePath}',
                                 ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 16.0),
                         Text(
@@ -190,11 +183,7 @@ class ExhibitorInfoScreen extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(
-          icon,
-          size: 20.0,
-          color: const Color(0xFF4CAF50),
-        ),
+        Icon(icon, size: 20.0, color: const Color(0xFF4CAF50)),
         const SizedBox(width: 12.0),
         Expanded(
           child: Column(

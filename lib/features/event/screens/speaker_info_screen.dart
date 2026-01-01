@@ -10,8 +10,10 @@ class SpeakerInfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final speakerName = speaker['speaker_name']?.toString() ?? 'Unknown Speaker';
+    final speakerName =
+        speaker['speaker_name']?.toString() ?? 'Unknown Speaker';
     final designation = speaker['designation']?.toString() ?? '';
+
     final profilePic = speaker['profile_pic']?.toString();
     final biography = speaker['biography']?.toString() ?? '';
     final presentingAt = speaker['presenting_at']?.toString() ?? '';
@@ -19,16 +21,15 @@ class SpeakerInfoScreen extends StatelessWidget {
     final eMailId = speaker['e_mail_id']?.toString() ?? '';
     final contactNo = speaker['contact_no']?.toString() ?? '';
     final themeTitle = speaker['theme_title']?.toString() ?? '';
-    final abstractPaperTitle = speaker['abstract_paper_title']?.toString() ?? '';
+    final abstractPaperTitle =
+        speaker['abstract_paper_title']?.toString() ?? '';
     final speakerTitle = speaker['speaker_title']?.toString() ?? '';
 
     return Scaffold(
       body: Column(
         children: [
           // Gradient Header
-          CommonGradientHeader(
-            title: speakerName,
-          ),
+          CommonGradientHeader(title: speakerName),
 
           // Speaker Detailed Content
           Expanded(
@@ -44,10 +45,9 @@ class SpeakerInfoScreen extends StatelessWidget {
                         CircleAvatar(
                           radius: 60,
                           backgroundImage: profilePic != null
-                              ? NetworkImage('${appConfig.apiBaseUrl}/$profilePic')
-                              : null,
-                          child: profilePic == null
-                              ? const Icon(Icons.person, size: 60)
+                              ? NetworkImage(
+                                  '${appConfig.storageUrl}/$profilePic',
+                                )
                               : null,
                         ),
                         const SizedBox(height: 16),
@@ -79,36 +79,34 @@ class SpeakerInfoScreen extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // Detailed Information Cards
-                  _buildInfoCard(
-                    'Professional Information',
-                    [
-                      if (designation.isNotEmpty) _buildInfoRow('Designation', designation),
-                      if (companyName.isNotEmpty) _buildInfoRow('Company', companyName),
-                      if (themeTitle.isNotEmpty) _buildInfoRow('Theme', themeTitle),
-                    ],
-                  ),
+                  _buildInfoCard('Professional Information', [
+                    if (designation.isNotEmpty)
+                      _buildInfoRow('Designation', designation),
+                    if (companyName.isNotEmpty)
+                      _buildInfoRow('Company', companyName),
+                    if (themeTitle.isNotEmpty)
+                      _buildInfoRow('Theme', themeTitle),
+                  ]),
 
                   const SizedBox(height: 16),
 
                   if (presentingAt.isNotEmpty)
-                    _buildInfoCard(
-                      'Presentation Details',
-                      [
-                        WidgetUtils.buildHtmlInfoRow('Presenting At', presentingAt),
-                        if (abstractPaperTitle.isNotEmpty)
-                          _buildInfoRow('Paper Title', abstractPaperTitle),
-                      ],
-                    ),
+                    _buildInfoCard('Presentation Details', [
+                      WidgetUtils.buildHtmlInfoRow(
+                        'Presenting At',
+                        presentingAt,
+                      ),
+                      if (abstractPaperTitle.isNotEmpty)
+                        _buildInfoRow('Paper Title', abstractPaperTitle),
+                    ]),
 
                   const SizedBox(height: 16),
 
-                  _buildInfoCard(
-                    'Contact Information',
-                    [
-                      if (eMailId.isNotEmpty) _buildInfoRow('Email', eMailId),
-                      if (contactNo.isNotEmpty) _buildInfoRow('Contact', contactNo),
-                    ],
-                  ),
+                  _buildInfoCard('Contact Information', [
+                    if (eMailId.isNotEmpty) _buildInfoRow('Email', eMailId),
+                    if (contactNo.isNotEmpty)
+                      _buildInfoRow('Contact', contactNo),
+                  ]),
 
                   const SizedBox(height: 16),
 
@@ -206,10 +204,7 @@ class SpeakerInfoScreen extends StatelessWidget {
           Expanded(
             child: Text(
               value,
-              style: const TextStyle(
-                fontSize: 14,
-                color: Color(0xFF333333),
-              ),
+              style: const TextStyle(fontSize: 14, color: Color(0xFF333333)),
             ),
           ),
         ],

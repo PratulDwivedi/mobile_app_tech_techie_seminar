@@ -37,16 +37,20 @@ class SponsorInfoScreen extends StatelessWidget {
                   Center(
                     child: Column(
                       children: [
-                        CircleAvatar(
-                          radius: 60,
-                          backgroundImage: logoPath != null
-                              ? NetworkImage(
-                                  '${appConfig.apiBaseUrl}/$logoPath',
-                                )
-                              : null,
-                          child: logoPath == null
-                              ? const Icon(Icons.business, size: 60)
-                              : null,
+                        Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              12,
+                            ), // Adjust radius as needed
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                '${appConfig.storageUrl}/${logoPath}',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 16),
                         Text(
@@ -70,7 +74,9 @@ class SponsorInfoScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(
-                                  color: _getSponsorTypeColor(sponsorType).withOpacity(0.3),
+                                  color: _getSponsorTypeColor(
+                                    sponsorType,
+                                  ).withOpacity(0.3),
                                   blurRadius: 6,
                                   offset: const Offset(0, 3),
                                 ),

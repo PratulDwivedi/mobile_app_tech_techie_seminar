@@ -112,31 +112,22 @@ class ExhibitorCard extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Row(
             children: [
-              // Logo
               Container(
-                width: 60,
-                height: 60,
+                width: 80,
+                height: 80,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(
+                    12,
+                  ), // Adjust radius as needed
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      '${appConfig.storageUrl}/${exhibitor.filePath}',
+                    ),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                child: exhibitor.filePath != null
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.network(
-                          '${appConfig.apiBaseUrl} /${exhibitor.filePath}',
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return const Icon(
-                              Icons.business,
-                              size: 30,
-                              color: Colors.grey,
-                            );
-                          },
-                        ),
-                      )
-                    : const Icon(Icons.business, size: 30, color: Colors.grey),
               ),
+
               const SizedBox(width: 16.0),
               // Exhibitor Info
               Expanded(

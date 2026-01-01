@@ -105,15 +105,21 @@ class SponsorCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Sponsor Logo
-                CircleAvatar(
-                  radius: 40,
-                  backgroundImage: logoPath != null
-                      ? NetworkImage('${appConfig.apiBaseUrl}/$logoPath')
-                      : null,
-                  child: const Icon(Icons.person, size: 40),
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      12,
+                    ), // Adjust radius as needed
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        '${appConfig.storageUrl}/${logoPath}',
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-
                 const SizedBox(width: 16),
                 // Sponsor Details
                 Expanded(

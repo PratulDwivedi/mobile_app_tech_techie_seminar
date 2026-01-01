@@ -224,8 +224,9 @@ class AppSidebarDrawer extends ConsumerWidget {
                     onTap: () {
                       Navigator.pop(context);
                       ScreenArgsModel screenArgsModel = ScreenArgsModel(
-                        routeName: AppPageRoute.helpline,
+                        routeName: "webview",
                         name: "Helpline",
+                        data: {"page_id": AppPageIds.helpLine},
                       );
 
                       NavigationService.navigateTo(

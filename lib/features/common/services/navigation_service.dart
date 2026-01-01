@@ -14,7 +14,6 @@ import '../models/screen_args_model.dart';
 import '../screens/book_cab_screen.dart';
 import '../screens/chat_screen.dart';
 import '../screens/feedback_screen.dart';
-import '../screens/help_line_screen.dart';
 import '../screens/my_appointments_screen.dart';
 import '../screens/nearby_places_screen.dart';
 import '../screens/places_of_interest_screen.dart';
@@ -88,11 +87,6 @@ class NavigationService {
         case AppPageRoute.bookCab:
           navigatorKey.currentState?.push(
             MaterialPageRoute(builder: (context) => BookCabScreen(args: args)),
-          );
-          break;
-        case AppPageRoute.helpline:
-          navigatorKey.currentState?.push(
-            MaterialPageRoute(builder: (context) => HelpLineScreen(args: args)),
           );
           break;
         case AppPageRoute.feedback:

@@ -113,10 +113,12 @@ class SpeakerCard extends StatelessWidget {
                 // Profile Picture
                 CircleAvatar(
                   radius: 40,
+
                   backgroundImage: profilePic != null
-                      ? NetworkImage('${appConfig.apiBaseUrl}/$profilePic')
+                      ? NetworkImage(
+                          '${appConfig.storageUrl}/${profilePic}',
+                        )
                       : null,
-                  child: Icon(getPageIcon('speaker'), size: 40),
                 ),
                 const SizedBox(width: 16),
                 // Speaker Details

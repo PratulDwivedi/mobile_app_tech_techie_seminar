@@ -68,7 +68,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             child: CircleAvatar(
                               radius: 50,
                               backgroundImage: NetworkImage(
-                                '${appConfig.apiBaseUrl}/${profileData['profile_pic']}', // Replace with actual base URL
+                                '${appConfig.storageUrl}/${profileData['profile_pic']}', // Replace with actual base URL
                               ),
                               child: Icon(getPageIcon('profile'), size: 50),
                             ),

@@ -33,11 +33,9 @@ class DelegateCard extends StatelessWidget {
                 // Profile Picture
                 CircleAvatar(
                   radius: 40,
-                  backgroundImage:
-                      profilePic != null && profilePic != 'delegate.png'
-                      ? NetworkImage('${appConfig.apiBaseUrl}/$profilePic')
-                      : null,
-                  child: const Icon(Icons.person, size: 40),
+                  backgroundImage: NetworkImage(
+                    '${appConfig.storageUrl}/$profilePic',
+                  ),
                 ),
                 const SizedBox(width: 16),
                 // Delegate Details
