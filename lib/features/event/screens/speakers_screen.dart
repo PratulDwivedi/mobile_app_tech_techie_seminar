@@ -8,8 +8,13 @@ import 'speaker_info_screen.dart';
 
 class SpeakersScreen extends ConsumerStatefulWidget {
   final ScreenArgsModel args;
+  final bool showHeader;
 
-  const SpeakersScreen({required this.args, super.key});
+  const SpeakersScreen({
+    required this.args,
+    this.showHeader = true,
+    super.key
+  });
 
   @override
   ConsumerState<SpeakersScreen> createState() => _SpeakersScreenState();
@@ -24,10 +29,12 @@ class _SpeakersScreenState extends ConsumerState<SpeakersScreen> {
   @override
   Widget build(BuildContext context) {
     final speakersAsync = ref.watch(speakersProvider);
-    return Scaffold(
-      body: Column(
-        children: [
-          // Gradient Header
+
+    // Content widget that can be used with or without scaffold
+    Widget content = Column(
+      children: [
+        // Conditionally show header
+        if (widget.showHeader)
           CommonGradientHeader(
             title: widget.args.name,
             onRefresh: () {
@@ -35,9 +42,9 @@ class _SpeakersScreenState extends ConsumerState<SpeakersScreen> {
             },
           ),
 
-          // Speakers Content
-          Expanded(
-            child: speakersAsync.when(
+        // Speakers Content
+        Expanded(
+          child: speakersAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (err, _) => Center(child: Text('Error: $err')),
               data: (response) {
@@ -74,8 +81,14 @@ class _SpeakersScreenState extends ConsumerState<SpeakersScreen> {
             ),
           ),
         ],
-      ),
-    );
+      );
+    
+
+    // Return with Scaffold if showing header (standalone screen)
+    // Return just content if embedded (no scaffold)
+    return widget.showHeader
+        ? Scaffold(body: content)
+        : content;
   }
 }
 
