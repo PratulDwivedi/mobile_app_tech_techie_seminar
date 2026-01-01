@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../common/widgets/common_gradient_header_widget.dart';
 import '../providers/event_service_provider.dart';
+import 'program_date_wise_screen.dart';
+import 'program_session_wise_screen.dart';
 import 'speakers_screen.dart';
 
 class ProgramScreen extends ConsumerStatefulWidget {
@@ -43,6 +45,7 @@ class _ProgramScreenState extends ConsumerState<ProgramScreen>
               ref.invalidate(programDateWiseProvider);
               ref.invalidate(programSessionWiseProvider);
               ref.invalidate(programSpeakerWiseProvider);
+              ref.invalidate(speakersProvider);
             },
           ),
 
@@ -68,116 +71,38 @@ class _ProgramScreenState extends ConsumerState<ProgramScreen>
               controller: _tabController,
               children: [
                 // Date Wise Tab
-                _buildDateWiseTab(),
+                ProgramDateWiseScreen(
+                  args: ScreenArgsModel(
+                    routeName: 'program-date-wise',
+                    name: 'Date Wise',
+                    data: {},
+                  ),
+                  showHeader: false,
+                ),
 
-                // Session Wise Tab
-                _buildSessionWiseTab(),
+                ProgramSessionWiseScreen(
+                  args: ScreenArgsModel(
+                    routeName: 'program-session-wise',
+                    name: 'Session Wise',
+                    data: {},
+                  ),
+                  showHeader: false,
+                ),
 
                 // Speaker Wise Tab (using SpeakersScreen)
-                _buildSpeakerWiseTab(),
+                SpeakersScreen(
+                  args: ScreenArgsModel(
+                    routeName: 'speakers',
+                    name: 'Speakers',
+                    data: {},
+                  ),
+                  showHeader: false,
+                ),
               ],
             ),
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildDateWiseTab() {
-    final dateWiseAsync = ref.watch(programDateWiseProvider);
-
-    return dateWiseAsync.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (err, _) => Center(child: Text('Error: $err')),
-      data: (response) {
-        if (!response.isSuccess) {
-          return Center(child: Text(response.message));
-        }
-
-        final _data = response.data;
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Program by Date',
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xFF333333),
-                      ),
-                ),
-                const SizedBox(height: 16.0),
-                // TODO: Implement date-wise program display
-                Container(
-                  padding: const EdgeInsets.all(16.0),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: const Text('Date-wise program content will be displayed here'),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildSessionWiseTab() {
-    final sessionWiseAsync = ref.watch(programSessionWiseProvider);
-
-    return sessionWiseAsync.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (err, _) => Center(child: Text('Error: $err')),
-      data: (response) {
-        if (!response.isSuccess) {
-          return Center(child: Text(response.message));
-        }
-
-        final _data = response.data;
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Program by Session',
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xFF333333),
-                      ),
-                ),
-                const SizedBox(height: 16.0),
-                // TODO: Implement session-wise program display
-                Container(
-                  padding: const EdgeInsets.all(16.0),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: const Text('Session-wise program content will be displayed here'),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildSpeakerWiseTab() {
-    // Use the existing SpeakersScreen as a reusable component without header
-    return SpeakersScreen(
-      args: ScreenArgsModel(
-        routeName: 'speakers',
-        name: 'Speakers',
-        data: {},
-      ),
-      showHeader: false,
     );
   }
 }
