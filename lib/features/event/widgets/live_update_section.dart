@@ -45,7 +45,7 @@ class LiveUpdateSection extends ConsumerWidget {
           ],
         ),
         const SizedBox(height: 16),
-        //const SocialPostCard(),
+        const SocialPostCard(),
       ],
     );
   }
