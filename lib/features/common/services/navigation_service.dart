@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app_tech_techie_seminar/features/event/screens/exhibitor_info_screen.dart';
 import '../../../config/app_constants.dart';
 import '../../auth/screens/login_screen.dart';
 import '../../event/screens/delegates_screen.dart';
 import '../../event/screens/documents_screen.dart';
+import '../../event/screens/exhibitor_info_screen.dart';
 import '../../event/screens/exhibitors_screen.dart';
 import '../../event/screens/gallery_screen.dart';
 import '../../event/screens/program_screen.dart';
