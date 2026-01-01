@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../config/app_config.dart';
 import '../../common/widgets/widget_utils.dart';
 import '../../common/widgets/common_gradient_header_widget.dart';
 
@@ -43,7 +44,7 @@ class SpeakerInfoScreen extends StatelessWidget {
                         CircleAvatar(
                           radius: 60,
                           backgroundImage: profilePic != null
-                              ? NetworkImage('https://your-api-base-url/$profilePic')
+                              ? NetworkImage('${appConfig.apiBaseUrl}/$profilePic')
                               : null,
                           child: profilePic == null
                               ? const Icon(Icons.person, size: 60)

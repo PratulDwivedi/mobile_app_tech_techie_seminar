@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app_tech_techie_seminar/features/event/screens/exhibitor_info_screen.dart';
 import '../../../config/app_constants.dart';
 import '../../auth/screens/login_screen.dart';
 import '../../event/screens/delegates_screen.dart';
@@ -137,6 +138,13 @@ class NavigationService {
           navigatorKey.currentState?.push(
             MaterialPageRoute(
               builder: (context) => DelegatesScreen(args: args),
+            ),
+          );
+          break;
+        case AppPageRoute.exhibitorInfo:
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(
+              builder: (context) => ExhibitorInfoScreen(args: args),
             ),
           );
           break;

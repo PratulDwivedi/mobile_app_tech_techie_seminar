@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../config/app_config.dart';
 import '../../common/widgets/common_gradient_header_widget.dart';
 import '../../common/widgets/widget_utils.dart';
 
@@ -40,7 +41,7 @@ class SponsorInfoScreen extends StatelessWidget {
                           radius: 60,
                           backgroundImage: logoPath != null
                               ? NetworkImage(
-                                  'https://your-api-base-url/$logoPath',
+                                  '${appConfig.apiBaseUrl}/$logoPath',
                                 )
                               : null,
                           child: logoPath == null

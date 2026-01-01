@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../config/app_config.dart';
+
 class DelegateCard extends StatelessWidget {
   final Map<String, dynamic> delegate;
 
@@ -33,11 +35,9 @@ class DelegateCard extends StatelessWidget {
                   radius: 40,
                   backgroundImage:
                       profilePic != null && profilePic != 'delegate.png'
-                      ? NetworkImage('https://your-api-base-url/$profilePic')
+                      ? NetworkImage('${appConfig.apiBaseUrl}/$profilePic')
                       : null,
-                  child: profilePic == null || profilePic == 'delegate.png'
-                      ? const Icon(Icons.person, size: 40)
-                      : null,
+                  child: const Icon(Icons.person, size: 40),
                 ),
                 const SizedBox(width: 16),
                 // Delegate Details

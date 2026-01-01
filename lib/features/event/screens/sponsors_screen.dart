@@ -1,3 +1,4 @@
+import '../../../config/app_config.dart';
 import '../../common/models/screen_args_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -85,7 +86,8 @@ class SponsorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sponsorName = sponsor['sponsor_name']?.toString() ?? 'Unknown Sponsor';
+    final sponsorName =
+        sponsor['sponsor_name']?.toString() ?? 'Unknown Sponsor';
     final sponsorType = sponsor['sponsor_type']?.toString() ?? '';
     final logoPath = sponsor['sponser_logo_path']?.toString();
     final address = sponsor['address']?.toString() ?? '';
@@ -107,12 +109,11 @@ class SponsorCard extends StatelessWidget {
                 CircleAvatar(
                   radius: 40,
                   backgroundImage: logoPath != null
-                      ? NetworkImage('https://your-api-base-url/$logoPath')
+                      ? NetworkImage('${appConfig.apiBaseUrl}/$logoPath')
                       : null,
-                  child: logoPath == null
-                      ? const Icon(Icons.business, size: 40)
-                      : null,
+                  child: const Icon(Icons.person, size: 40),
                 ),
+
                 const SizedBox(width: 16),
                 // Sponsor Details
                 Expanded(
@@ -130,13 +131,18 @@ class SponsorCard extends StatelessWidget {
                       if (sponsorType.isNotEmpty) ...[
                         const SizedBox(height: 4),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
                           decoration: BoxDecoration(
                             color: _getSponsorTypeColor(sponsorType),
                             borderRadius: BorderRadius.circular(16),
                             boxShadow: [
                               BoxShadow(
-                                color: _getSponsorTypeColor(sponsorType).withOpacity(0.3),
+                                color: _getSponsorTypeColor(
+                                  sponsorType,
+                                ).withOpacity(0.3),
                                 blurRadius: 4,
                                 offset: const Offset(0, 2),
                               ),

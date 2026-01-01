@@ -1,3 +1,4 @@
+import '../../../config/app_config.dart';
 import '../../common/models/screen_args_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -111,7 +112,7 @@ class SpeakerCard extends StatelessWidget {
                 CircleAvatar(
                   radius: 40,
                   backgroundImage: profilePic != null
-                      ? NetworkImage('https://your-api-base-url/$profilePic')
+                      ? NetworkImage('${appConfig.apiBaseUrl}/$profilePic')
                       : null,
                   child: profilePic == null
                       ? const Icon(Icons.person, size: 40)

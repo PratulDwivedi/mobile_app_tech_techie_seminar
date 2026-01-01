@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 class ApiRoutes {
   static const String signIn = 'seminar.fn_signin_mobile_delegate';
   static const String profile = 'seminar.fn_get_mobile_delegate';
@@ -17,9 +19,9 @@ class ApiRoutes {
   static const String documents = 'seminar.fn_get_mobile_documents'; //
   static const String program = 'seminar.fn_get_mobile_program'; //
   static const String speakers = 'seminar.fn_get_mobile_speakers'; 
-  static const String sponsors = 'seminar.fn_get_mobile_sponsors'; //
-  static const String exhibitors = 'seminar.fn_get_mobile_exhibitors'; //
-  static const String delegates = 'seminar.fn_get_mobile_delegates'; //
+  static const String sponsors = 'seminar.fn_get_mobile_sponsors'; 
+  static const String exhibitors = 'seminar.fn_get_mobile_exhibitors';
+  static const String delegates = 'seminar.fn_get_mobile_delegates'; 
 }
 
 class AppPageRoute {
@@ -40,6 +42,7 @@ class AppPageRoute {
   static const String sponsors = 'sponsors';
   static const String exhibitors = 'exhibitors';
   static const String delegates = 'delegates';
+  static const String exhibitorInfo = 'exhibitor_info';
 }
 
 class AppPageIds {
@@ -52,3 +55,7 @@ class AppPageIds {
   static const int culturalProgramme = 237;
   static const int faqs = 249;
 }
+
+// Map<String, Widget> pageIcons = {
+//   'exhibition': Icons.museum,
+// };

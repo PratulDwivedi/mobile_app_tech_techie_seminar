@@ -19,7 +19,12 @@ abstract class EventService {
   Future<ResponseMessageModel> getSpeakers();
   Future<ResponseMessageModel> getSponsors();
   Future<ResponseMessageModel> getDelegates(int pageNo);
-  Future<ResponseMessageModel> getDelegatesWithFilter(int pageNo, DelegateFilter? filter);
+  Future<ResponseMessageModel> getDelegatesWithFilter(
+    int pageNo,
+    DelegateFilter? filter,
+  );
+
+  Future<ResponseMessageModel> getExhibitors();
 
   Future<ResponseMessageModel> getSummaryCount();
   Future<ResponseMessageModel> getHtmlContent(int pageId);

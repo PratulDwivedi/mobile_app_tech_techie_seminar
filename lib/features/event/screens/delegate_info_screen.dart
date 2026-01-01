@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../config/app_config.dart';
 import '../../../utils/widget_utils.dart';
 import '../../common/widgets/common_gradient_header_widget.dart';
 
@@ -44,7 +45,7 @@ class DelegateInfoScreen extends StatelessWidget {
                         CircleAvatar(
                           radius: 60,
                           backgroundImage: profilePic != null && profilePic != 'delegate.png'
-                              ? NetworkImage('https://your-api-base-url/$profilePic')
+                              ? NetworkImage('${appConfig.apiBaseUrl}/$profilePic')
                               : null,
                           child: profilePic == null || profilePic == 'delegate.png'
                               ? const Icon(Icons.person, size: 60)

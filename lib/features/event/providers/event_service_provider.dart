@@ -7,7 +7,6 @@ final eventServiceProvider = Provider<EventService>((ref) {
   return EventService.instance;
 });
 
-
 // HTML Content Provider (for a specific page)
 final htmlContentProvider = FutureProvider.family<ResponseMessageModel, int>((
   ref,
@@ -56,13 +55,18 @@ final sponsorsProvider = FutureProvider<ResponseMessageModel>((ref) async {
   return await service.getSponsors();
 });
 
-final delegatesProvider = FutureProvider.family<ResponseMessageModel, DelegatesProviderParams>((
-  ref,
-  params,
-) async {
+final exhibitorsProvider = FutureProvider<ResponseMessageModel>((ref) async {
   final service = ref.watch(eventServiceProvider);
-  return await service.getDelegatesWithFilter(params.pageNo, params.filter);
+  return await service.getExhibitors();
 });
 
+final delegatesProvider =
+    FutureProvider.family<ResponseMessageModel, DelegatesProviderParams>((
+      ref,
+      params,
+    ) async {
+      final service = ref.watch(eventServiceProvider);
+      return await service.getDelegatesWithFilter(params.pageNo, params.filter);
+    });
 
 final selectedTabProvider = StateProvider<int>((ref) => 0);

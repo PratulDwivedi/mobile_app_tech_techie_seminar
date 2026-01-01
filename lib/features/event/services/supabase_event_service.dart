@@ -51,6 +51,12 @@ class SupabaseEventService implements EventService {
   }
 
   @override
+  Future<ResponseMessageModel> getExhibitors() async {
+    final response = await SupabaseApiHelper.post(ApiRoutes.exhibitors, null);
+    return response;
+  }
+
+  @override
   Future<ResponseMessageModel> getDelegates(int pageNo) async {
     final response = await SupabaseApiHelper.post(ApiRoutes.delegates, {
       "p_page_no": pageNo,
@@ -59,7 +65,10 @@ class SupabaseEventService implements EventService {
   }
 
   @override
-  Future<ResponseMessageModel> getDelegatesWithFilter(int pageNo, DelegateFilter? filter) async {
+  Future<ResponseMessageModel> getDelegatesWithFilter(
+    int pageNo,
+    DelegateFilter? filter,
+  ) async {
     final requestBody = {
       "p_page_no": pageNo,
       "p_order_by": filter?.orderBy ?? 1,
@@ -68,7 +77,10 @@ class SupabaseEventService implements EventService {
       "p_alpha_key": filter?.alphaKey ?? '',
       "p_delegate_id": filter?.delegateId ?? 0,
     };
-    final response = await SupabaseApiHelper.post(ApiRoutes.delegates, requestBody);
+    final response = await SupabaseApiHelper.post(
+      ApiRoutes.delegates,
+      requestBody,
+    );
     return response;
   }
 }
