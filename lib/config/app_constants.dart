@@ -22,6 +22,7 @@ class ApiRoutes {
   static const String delegates = 'seminar.fn_get_mobile_delegates';
   static const String fileMetadata = 'public.fn_save_file_metadata';
   static const String uploadFile = 'functions/v1/upload-file';
+  static const String banners = 'seminar.fn_get_mobile_banners';
 }
 
 class AppPageRoute {

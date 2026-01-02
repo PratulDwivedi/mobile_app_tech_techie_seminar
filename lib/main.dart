@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'auth_wrapper.dart';
 import 'config/app_config.dart';
+import 'config/app_theme.dart';
 import 'features/common/services/app_snackbar_service.dart';
 import 'features/common/services/navigation_service.dart';
 import 'firebase/firebase_options.dart';
@@ -32,7 +33,7 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: appConfig.appName,
-      theme: ThemeData(useMaterial3: true),
+      theme: AppTheme.lightTheme,
       navigatorKey: NavigationService.navigatorKey,
       onGenerateRoute: NavigationService.onGenerateRoute,
       home: AuthWrapper(notificationServices: notificationServices),

@@ -60,6 +60,11 @@ final exhibitorsProvider = FutureProvider<ResponseMessageModel>((ref) async {
   return await service.getExhibitors();
 });
 
+final bannersProvider = FutureProvider<ResponseMessageModel>((ref) async {
+  final service = ref.watch(eventServiceProvider);
+  return await service.getBanners();
+});
+
 final delegatesProvider =
     FutureProvider.family<ResponseMessageModel, DelegatesProviderParams>((
       ref,

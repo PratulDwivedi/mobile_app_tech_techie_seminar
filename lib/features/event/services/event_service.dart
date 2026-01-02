@@ -24,6 +24,7 @@ abstract class EventService {
     DelegateFilter? filter,
   );
 
+  Future<ResponseMessageModel> getBanners();
   Future<ResponseMessageModel> getExhibitors();
 
   Future<ResponseMessageModel> getSummaryCount();
