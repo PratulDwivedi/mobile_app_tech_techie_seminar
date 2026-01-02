@@ -14,7 +14,6 @@ class ActionTilesSection extends StatelessWidget {
           icon: getPageIcon('exhibition'),
           title: 'Exhibition',
           subtitle: 'Exhibition Details',
-          badge: '250+ Photos',
           gradientColors: [
             Color.fromARGB(255, 220, 242, 97),
             Color(0xFFF43F5E),
@@ -36,7 +35,6 @@ class ActionTilesSection extends StatelessWidget {
           icon: getPageIcon('culturalProgram'),
           title: 'Cultural Program',
           subtitle: 'Cultural Program Details',
-          badge: 'Scan to enter',
           gradientColors: [Color(0xFF6366F1), Color(0xFF9333EA)],
           onTap: () {
             NavigationService.navigateTo(
@@ -55,7 +53,6 @@ class ActionTilesSection extends StatelessWidget {
           icon: getPageIcon('gallery'),
           title: 'Gallery',
           subtitle: 'Photos & videos',
-          badge: '250+ Photos',
           gradientColors: [Color(0xFFEC4899), Color(0xFFF43F5E)],
           onTap: () {
             ScreenArgsModel screenArgsModel = ScreenArgsModel(
@@ -75,7 +72,6 @@ class ActionTilesSection extends StatelessWidget {
           icon: getPageIcon('document'),
           title: 'Resources',
           subtitle: 'Presentations & documents',
-          badge: '15 Files',
           gradientColors: [Color(0xFF14B8A6), Color(0xFF06B6D4)],
           onTap: () {
             ScreenArgsModel screenArgsModel = ScreenArgsModel(
@@ -98,7 +94,6 @@ class ActionTile extends StatelessWidget {
   final IconData icon;
   final String title;
   final String subtitle;
-  final String badge;
   final List<Color> gradientColors;
   final VoidCallback onTap; // 👈 ADD THIS
 
@@ -107,7 +102,6 @@ class ActionTile extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.subtitle,
-    required this.badge,
     required this.gradientColors,
     required this.onTap, // 👈 ADD THIS
   });
@@ -165,25 +159,6 @@ class ActionTile extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF374151),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    badge,
-                    style: const TextStyle(
-                      color: Color(0xFF9CA3AF),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 8),
                 const Icon(Icons.chevron_right, color: Color(0xFF6B7280)),
               ],
             ),
