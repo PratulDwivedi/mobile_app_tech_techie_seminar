@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/app_config.dart';
@@ -14,11 +15,33 @@ class SponsorsBannerWidget extends ConsumerStatefulWidget {
 class _SponsorsBannerWidgetState extends ConsumerState<SponsorsBannerWidget> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
+  Timer? _timer;
+  int _bannerCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _startAutoScroll();
+  }
 
   @override
   void dispose() {
+    _timer?.cancel();
     _pageController.dispose();
     super.dispose();
+  }
+
+  void _startAutoScroll() {
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      if (_pageController.hasClients && _bannerCount > 0) {
+        final nextPage = (_currentPage + 1) % _bannerCount;
+        _pageController.animateToPage(
+          nextPage,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
   }
 
   @override
@@ -54,95 +77,83 @@ class _SponsorsBannerWidgetState extends ConsumerState<SponsorsBannerWidget> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: Container(
-                      padding: const EdgeInsets.all(24),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: bannersAsync.when(
-                        data: (response) {
-                          if (response.isSuccess) {
-                            final banners = response.data
-                                .map((json) => BannerModel.fromJson(json))
-                                .toList();
-                            if (banners.isEmpty) {
-                              return const Center(
-                                child: Text('No banners available'),
+              padding: const EdgeInsets.all(16),
+              child: bannersAsync.when(
+                data: (response) {
+                  if (response.isSuccess) {
+                    final banners = response.data
+                        .map((json) => BannerModel.fromJson(json))
+                        .toList();
+                    if (banners.isEmpty) {
+                      return const Center(
+                        child: Text('No banners available'),
+                      );
+                    }
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      setState(() {
+                        _bannerCount = banners.length;
+                      });
+                    });
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: 120,
+                          child: PageView.builder(
+                            controller: _pageController,
+                            itemCount: banners.length,
+                            onPageChanged: (index) {
+                              setState(() {
+                                _currentPage = index;
+                              });
+                            },
+                            itemBuilder: (context, index) {
+                              final banner = banners[index];
+                              return Center(
+                                child: banner.bannerImage.isNotEmpty
+                                    ? Image.network(
+                                        '${appConfig.storageUrl}/${banner.bannerImage}',
+                                        height: 100,
+                                        fit: BoxFit.cover,
+                                        errorBuilder: (context, error, stackTrace) =>
+                                            const Icon(Icons.image_not_supported),
+                                      )
+                                    : const Icon(Icons.image_not_supported),
                               );
-                            }
-                            return Column(
-                              children: [
-                                SizedBox(
-                                  height: 200, // Adjust height as needed
-                                  child: PageView.builder(
-                                    controller: _pageController,
-                                    itemCount: banners.length,
-                                    onPageChanged: (index) {
-                                      setState(() {
-                                        _currentPage = index;
-                                      });
-                                    },
-                                    itemBuilder: (context, index) {
-                                      final banner = banners[index];
-                                      return Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          if (banner.bannerImage.isNotEmpty)
-                                            Image.network(
-                                              '${appConfig.storageUrl}/${banner.bannerImage}',
-                                              height: 100,
-                                              fit: BoxFit.cover,
-                                              errorBuilder: (context, error, stackTrace) =>
-                                                  const Icon(Icons.image_not_supported),
-                                            ),
-                                        ],
-                                      );
-                                    },
-                                  ),
-                                ),
-                                const SizedBox(height: 16),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: List.generate(
-                                    banners.length,
-                                    (index) => Container(
-                                      margin: const EdgeInsets.symmetric(horizontal: 4),
-                                      width: 8,
-                                      height: 8,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: _currentPage == index
-                                            ? const Color(0xFF1E3A8A)
-                                            : Colors.grey.shade300,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          } else {
-                            return Center(
-                              child: Text(response.message),
-                            );
-                          }
-                        },
-                        loading: () => const Center(
-                          child: CircularProgressIndicator(),
+                            },
+                          ),
                         ),
-                        error: (error, stack) => Center(
-                          child: Text('Error: $error'),
+                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(
+                            banners.length,
+                            (index) => Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 2),
+                              width: 6,
+                              height: 6,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: _currentPage == index
+                                    ? Colors.white
+                                    : Colors.white.withOpacity(0.5),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                ],
+                      ],
+                    );
+                  } else {
+                    return Center(
+                      child: Text(response.message),
+                    );
+                  }
+                },
+                loading: () => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                error: (error, stack) => Center(
+                  child: Text('Error: $error'),
+                ),
               ),
             ),
           ],
