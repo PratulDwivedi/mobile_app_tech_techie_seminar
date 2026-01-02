@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../config/app_config.dart';
 import '../../../config/app_constants.dart';
 import '../../common/models/screen_args_model.dart';
 import '../../common/services/navigation_service.dart';
+import '../providers/event_service_provider.dart';
 
-class DGMessageCard extends StatelessWidget {
+class DGMessageCard extends ConsumerWidget {
   const DGMessageCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final summaryAsync = ref.watch(eventSummaryCountProvider);
     return Container(
       decoration: BoxDecoration(
         gradient: const LinearGradient(
@@ -32,43 +35,80 @@ class DGMessageCard extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       child: Row(
         children: [
-          Stack(
-            children: [
-              Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: Colors.white.withOpacity(0.5),
-                    width: 4,
-                  ),
-                ),
-                child: Container(
-                  margin: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [Color(0xFFD1D5DB), Color(0xFF9CA3AF)],
+          summaryAsync.when(
+            loading: () => const SizedBox(
+              width: 80,
+              height: 80,
+              child: CircularProgressIndicator(),
+            ),
+            error: (err, _) =>
+                const SizedBox(width: 80, height: 80, child: Icon(Icons.error)),
+            data: (response) {
+              if (!response.isSuccess || response.data.isEmpty) {
+                return const SizedBox(
+                  width: 80,
+                  height: 80,
+                  child: Icon(Icons.person),
+                );
+              }
+              final summaryData = response.data.first;
+              final dgPhoto = summaryData['dg_photo']?.toString();
+              return Stack(
+                children: [
+                  Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.5),
+                        width: 4,
+                      ),
                     ),
-                    borderRadius: BorderRadius.circular(16),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: dgPhoto != null && dgPhoto.isNotEmpty
+                          ? Image.network(
+                              '${appConfig.storageUrl}/$dgPhoto',
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                        colors: [
+                                          Color(0xFFD1D5DB),
+                                          Color(0xFF9CA3AF),
+                                        ],
+                                      ),
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: const Icon(
+                                      Icons.person,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                            )
+                          : Container(
+                              decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color(0xFFD1D5DB),
+                                    Color(0xFF9CA3AF),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: const Icon(
+                                Icons.person,
+                                color: Colors.white,
+                              ),
+                            ),
+                    ),
                   ),
-                ),
-              ),
-              Positioned(
-                bottom: -4,
-                right: -4,
-                child: Container(
-                  width: 28,
-                  height: 28,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF10B981),
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 4),
-                  ),
-                ),
-              ),
-            ],
+                ],
+              );
+            },
           ),
           const SizedBox(width: 16),
           Expanded(

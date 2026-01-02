@@ -5,6 +5,7 @@ import '../../../config/app_constants.dart';
 import '../../common/models/screen_args_model.dart';
 import '../../common/services/navigation_service.dart';
 import '../../auth/providers/auth_service_provider.dart';
+import '../providers/event_service_provider.dart';
 
 class AppSidebarDrawer extends ConsumerWidget {
   const AppSidebarDrawer({super.key});
@@ -12,6 +13,7 @@ class AppSidebarDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profileAsync = ref.watch(profileProvider);
+    final summaryAsync = ref.watch(eventSummaryCountProvider);
 
     return Drawer(
       child: Container(
@@ -268,40 +270,47 @@ class AppSidebarDrawer extends ConsumerWidget {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.grey[50],
                 border: Border(top: BorderSide(color: Colors.grey[200]!)),
               ),
               child: Column(
                 children: [
-                  Text(
-                    'Sponsored by',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey[600],
-                      fontWeight: FontWeight.w500,
+                  // Sponsor Logo
+                  summaryAsync.when(
+                    loading: () => const SizedBox(
+                      height: 40,
+                      child: Center(child: CircularProgressIndicator()),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  // Sponsor Logo Placeholder
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
+                    error: (err, _) => const SizedBox(
+                      height: 40,
+                      child: Center(child: Text('Error')),
                     ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.grey[300]!),
-                    ),
-                    child: const Text(
-                      'Sponsor Logo',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF2E7D32),
-                        letterSpacing: 2,
-                      ),
-                    ),
+                    data: (response) {
+                      if (!response.isSuccess || response.data.isEmpty) {
+                        return const SizedBox(
+                          height: 40,
+                          child: Center(child: Text('No Sponsor')),
+                        );
+                      }
+                      final summaryData = response.data.first;
+                      final appSponsor = summaryData['app_sponsor']?.toString();
+                      return Container(
+                        height: 70,
+                        //padding: const EdgeInsets.symmetric(horizontal: 16),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          //border: Border.all(color: Colors.grey[300]!),
+                        ),
+                        child: appSponsor != null && appSponsor.isNotEmpty
+                            ? Image.network(
+                                '${appConfig.storageUrl}/$appSponsor',
+                                fit: BoxFit.contain,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    const Center(child: Text('Sponsor Logo')),
+                              )
+                            : const Center(child: Text('Sponsor Logo')),
+                      );
+                    },
                   ),
                 ],
               ),
