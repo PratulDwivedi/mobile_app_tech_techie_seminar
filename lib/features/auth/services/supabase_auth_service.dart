@@ -53,11 +53,22 @@ class SupabaseAuthService implements AuthService {
   Future<ResponseMessageModel> updatePassword(
     String oldPassword,
     String newPassword,
+    String confirmPassword,
   ) {
     return SupabaseApiHelper.safeApiCall(() async {
       return await SupabaseApiHelper.post(ApiRoutes.updatePassword, {
         'p_old_password': oldPassword,
         'p_new_password': newPassword,
+        'p_confirm_password': confirmPassword,
+      });
+    });
+  }
+
+  @override
+  Future<ResponseMessageModel> updateProfilePicture(String profilePicPath) {
+    return SupabaseApiHelper.safeApiCall(() async {
+      return await SupabaseApiHelper.post(ApiRoutes.updateProfilePic, {
+        'p_profile_pic': profilePicPath,
       });
     });
   }

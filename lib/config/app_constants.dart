@@ -4,6 +4,7 @@ class ApiRoutes {
   static const String signIn = 'seminar.fn_signin_mobile_delegate';
   static const String profile = 'seminar.fn_get_mobile_delegate';
   static const String updatePassword = 'seminar.fn_update_delegate_password';
+  static const String updateProfilePic = 'seminar.fn_update_delegate_profile_pic';
   static const String htmlContent = 'seminar.fn_get_mobile_html_content';
   static const String summaryCount = 'seminar.fn_get_mobile_event_counts';
   static const String myAppointments =
@@ -19,6 +20,8 @@ class ApiRoutes {
   static const String sponsors = 'seminar.fn_get_mobile_sponsors';
   static const String exhibitors = 'seminar.fn_get_mobile_exhibitors';
   static const String delegates = 'seminar.fn_get_mobile_delegates';
+  static const String fileMetadata = 'public.fn_save_file_metadata';
+  static const String uploadFile = 'functions/v1/upload-file';
 }
 
 class AppPageRoute {

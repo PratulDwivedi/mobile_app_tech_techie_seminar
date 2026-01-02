@@ -1,19 +1,19 @@
-import '../models/screen_args_model.dart';
+import '../../common/models/screen_args_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../widgets/common_gradient_header_widget.dart';
-import '../../auth/providers/auth_service_provider.dart';
+import '../../common/widgets/common_gradient_header_widget.dart';
+import '../providers/auth_service_provider.dart';
 
-class NearbyPlacesScreen extends ConsumerStatefulWidget {
+class BookCabScreen extends ConsumerStatefulWidget {
   final ScreenArgsModel args;
 
-  const NearbyPlacesScreen({required this.args, super.key});
+  const BookCabScreen({required this.args, super.key});
 
   @override
-  ConsumerState<NearbyPlacesScreen> createState() => _NearbyPlacesScreenState();
+  ConsumerState<BookCabScreen> createState() => _BookCabScreenState();
 }
 
-class _NearbyPlacesScreenState extends ConsumerState<NearbyPlacesScreen> {
+class _BookCabScreenState extends ConsumerState<BookCabScreen> {
   @override
   void initState() {
     super.initState();

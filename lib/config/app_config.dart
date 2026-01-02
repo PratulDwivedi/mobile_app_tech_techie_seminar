@@ -9,6 +9,8 @@ class AppConfig {
   final String webSiteUrl;
   final String apiBaseUrl;
   final String storageUrl;
+  final String bucketName;
+  final String storageUuid;
   final String localKey;
   final ServiceType serviceType;
 
@@ -19,6 +21,8 @@ class AppConfig {
     required this.webSiteUrl,
     required this.apiBaseUrl,
     required this.storageUrl,
+    required this.bucketName,
+    required this.storageUuid,
     required this.localKey,
     required this.serviceType,
   });
@@ -33,6 +37,8 @@ const Map<String, AppConfig> configs = {
     apiBaseUrl: 'https://tpgyuqvncljnuyrohqre.supabase.co',
     storageUrl:
         'https://tpgyuqvncljnuyrohqre.supabase.co/storage/v1/object/public/private_files/1d40edf7-7af6-411d-b85a-0428bfe7bafc',
+    bucketName: "private_files",
+    storageUuid: "1d40edf7-7af6-411d-b85a-0428bfe7bafc",
     localKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRwZ3l1cXZuY2xqbnV5cm9ocXJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4NDIxMTMsImV4cCI6MjA2MzQxODExM30.7FbAYzOpsJ7sNGM-2H5kzy5zQLN-SgO2KcRCtTiJu60',
     serviceType: ServiceType.supabase,
@@ -45,6 +51,9 @@ const Map<String, AppConfig> configs = {
     apiBaseUrl: 'https://tpgyuqvncljnuyrohqre.supabase.co',
     storageUrl:
         'https://tpgyuqvncljnuyrohqre.supabase.co/storage/v1/object/public/private_files/1d40edf7-7af6-411d-b85a-0428bfe7bafc',
+    bucketName: "private_files",
+    storageUuid:
+        "1d40edf7-7af6-411d-b85a-0428bfe7bafc", // for FAI guid for storage
     localKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRwZ3l1cXZuY2xqbnV5cm9ocXJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4NDIxMTMsImV4cCI6MjA2MzQxODExM30.7FbAYzOpsJ7sNGM-2H5kzy5zQLN-SgO2KcRCtTiJu60',
     serviceType: ServiceType.supabase,
@@ -57,6 +66,9 @@ const Map<String, AppConfig> configs = {
     apiBaseUrl: 'https://tpgyuqvncljnuyrohqre.supabase.co',
     storageUrl:
         'https://tpgyuqvncljnuyrohqre.supabase.co/storage/v1/object/public/private_files/1d40edf7-7af6-411d-b85a-0428bfe7bafc',
+    bucketName: "private_files",
+    storageUuid:
+        "1d40edf7-7af6-411d-b85a-0428bfe7bafc", // for FAI guid for storage
     localKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRwZ3l1cXZuY2xqbnV5cm9ocXJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4NDIxMTMsImV4cCI6MjA2MzQxODExM30.7FbAYzOpsJ7sNGM-2H5kzy5zQLN-SgO2KcRCtTiJu60',
     serviceType: ServiceType.supabase,
@@ -68,6 +80,8 @@ const Map<String, AppConfig> configs = {
     webSiteUrl: 'https://tech-techi.com',
     apiBaseUrl: 'https://api.tech-techi.com',
     storageUrl: '',
+    bucketName: "",
+    storageUuid: "",
     localKey: '',
     serviceType: ServiceType.custom,
   ),
@@ -78,6 +92,8 @@ const Map<String, AppConfig> configs = {
     webSiteUrl: 'https://tech-techi.com',
     apiBaseUrl: 'https://api.tech-techi.com',
     storageUrl: '',
+    bucketName: "",
+    storageUuid: "",
     localKey: '',
     serviceType: ServiceType.custom,
   ),
@@ -88,6 +104,8 @@ const Map<String, AppConfig> configs = {
     webSiteUrl: 'https://tech-techi.com',
     apiBaseUrl: 'https://api.tech-techi.com',
     storageUrl: '',
+    bucketName: "",
+    storageUuid: "",
     localKey: '',
     serviceType: ServiceType.custom,
   ),

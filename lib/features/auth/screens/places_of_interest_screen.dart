@@ -1,20 +1,21 @@
-import '../models/screen_args_model.dart';
+import '../../common/models/screen_args_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../widgets/common_gradient_header_widget.dart';
-import '../../auth/providers/auth_service_provider.dart';
+import '../../common/widgets/common_gradient_header_widget.dart';
+import '../providers/auth_service_provider.dart';
 
-class MyAppointmentsScreen extends ConsumerStatefulWidget {
+class PlacesOfInterestScreen extends ConsumerStatefulWidget {
   final ScreenArgsModel args;
 
-  const MyAppointmentsScreen({required this.args, super.key});
+  const PlacesOfInterestScreen({required this.args, super.key});
 
   @override
-  ConsumerState<MyAppointmentsScreen> createState() =>
-      _MyAppointmentsScreenState();
+  ConsumerState<PlacesOfInterestScreen> createState() =>
+      _PlacesOfInterestScreenState();
 }
 
-class _MyAppointmentsScreenState extends ConsumerState<MyAppointmentsScreen> {
+class _PlacesOfInterestScreenState
+    extends ConsumerState<PlacesOfInterestScreen> {
   @override
   void initState() {
     super.initState();

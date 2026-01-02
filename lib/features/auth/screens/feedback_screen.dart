@@ -1,19 +1,19 @@
-import '../models/screen_args_model.dart';
+import '../../common/models/screen_args_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../widgets/common_gradient_header_widget.dart';
-import '../../auth/providers/auth_service_provider.dart';
+import '../../common/widgets/common_gradient_header_widget.dart';
+import '../providers/auth_service_provider.dart';
 
-class BookCabScreen extends ConsumerStatefulWidget {
+class FeedbackScreen extends ConsumerStatefulWidget {
   final ScreenArgsModel args;
 
-  const BookCabScreen({required this.args, super.key});
+  const FeedbackScreen({required this.args, super.key});
 
   @override
-  ConsumerState<BookCabScreen> createState() => _BookCabScreenState();
+  ConsumerState<FeedbackScreen> createState() => _FeedbackScreenState();
 }
 
-class _BookCabScreenState extends ConsumerState<BookCabScreen> {
+class _FeedbackScreenState extends ConsumerState<FeedbackScreen> {
   @override
   void initState() {
     super.initState();

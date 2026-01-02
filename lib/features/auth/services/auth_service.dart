@@ -28,5 +28,8 @@ abstract class AuthService {
   Future<ResponseMessageModel> updatePassword(
     String oldPassword,
     String newPassword,
+    String confirmPassword,
   );
+
+  Future<ResponseMessageModel> updateProfilePicture(String profilePicPath);
 }

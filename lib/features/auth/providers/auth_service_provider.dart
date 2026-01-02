@@ -41,3 +41,12 @@ final isAuthenticatedProvider = Provider<bool>((ref) {
 final authServiceProvider = Provider<AuthService>((ref) {
   return AuthService.instance;
 });
+
+final updateProfilePictureProvider =
+    FutureProvider.family<ResponseMessageModel, String>((
+      ref,
+      profilePicPath,
+    ) async {
+      final service = ref.watch(authServiceProvider);
+      return await service.updateProfilePicture(profilePicPath);
+    });

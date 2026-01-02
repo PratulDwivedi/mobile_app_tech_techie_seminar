@@ -1,11 +1,9 @@
-import 'package:mobile_app_tech_techie_seminar/config/app_config.dart';
-
-import '../../../config/app_constants.dart';
-import '../models/screen_args_model.dart';
+import '../../common/models/screen_args_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../widgets/common_gradient_header_widget.dart';
-import '../../auth/providers/auth_service_provider.dart';
+import '../../common/widgets/common_gradient_header_widget.dart';
+import '../providers/auth_service_provider.dart';
+import '../widgets/profile_picture_upload.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   final ScreenArgsModel args;
@@ -63,16 +61,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         const SizedBox(height: 20),
 
                         // Profile Picture
-                        if (profileData['profile_pic'] != null)
-                          Center(
-                            child: CircleAvatar(
-                              radius: 50,
-                              backgroundImage: NetworkImage(
-                                '${appConfig.storageUrl}/${profileData['profile_pic']}', // Replace with actual base URL
-                              ),
-                              child: Icon(getPageIcon('profile'), size: 50),
-                            ),
-                          ),
+                        ProfilePictureUpload(
+                          currentProfilePic: profileData['profile_pic']
+                              ?.toString(),
+                          onProfilePicUpdated: (newProfilePic) {
+                            // Refresh the profile data
+                            ref.invalidate(profileProvider);
+                          },
+                        ),
 
                         const SizedBox(height: 20),
 

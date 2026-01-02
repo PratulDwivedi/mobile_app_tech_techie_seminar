@@ -11,13 +11,13 @@ import '../../event/screens/seminar_home_screen.dart';
 import '../../event/screens/speakers_screen.dart';
 import '../../event/screens/sponsors_screen.dart';
 import '../models/screen_args_model.dart';
-import '../screens/book_cab_screen.dart';
+import '../../auth/screens/book_cab_screen.dart';
 import '../screens/chat_screen.dart';
-import '../screens/feedback_screen.dart';
-import '../screens/my_appointments_screen.dart';
-import '../screens/nearby_places_screen.dart';
-import '../screens/places_of_interest_screen.dart';
-import '../screens/profile_screen.dart';
+import '../../auth/screens/feedback_screen.dart';
+import '../../auth/screens/my_appointments_screen.dart';
+import '../../auth/screens/nearby_places_screen.dart';
+import '../../auth/screens/places_of_interest_screen.dart';
+import '../../auth/screens/profile_screen.dart';
 import '../screens/web_view_screen.dart';
 
 class NavigationService {
