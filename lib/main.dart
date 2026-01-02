@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'auth_wrapper.dart';
 import 'config/app_config.dart';
@@ -14,14 +13,6 @@ void main() async {
 
   // Initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  if (appConfig.serviceType == ServiceType.supabase) {
-    // Initialize Supabase
-    await Supabase.initialize(
-      url: appConfig.apiBaseUrl,
-      anonKey: appConfig.localKey,
-    );
-  }
 
   // Request notification permissions and set up FCM
   final notificationServices = NotificationServices();
