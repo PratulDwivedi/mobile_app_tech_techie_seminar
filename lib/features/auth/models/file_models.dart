@@ -15,7 +15,7 @@ class FileMetadataModel {
     return FileMetadataModel(
       originalFilename: json['original_filename'],
       fileSizeBytes: json['file_size_bytes'],
-      storedFileName: json['storage_path'],
+      storedFileName: json['stored_filename'],
       mimeType: json['mime_type'],
     );
   }

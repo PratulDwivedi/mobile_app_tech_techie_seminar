@@ -62,7 +62,7 @@ class SupabaseFileUploadService implements FileUploadService {
       final responseFileMeta = await SupabaseApiHelper.post(
         ApiRoutes.fileMetadata,
         {
-          "p_storage_path": fileMetadata.storedFileName,
+          "p_stored_filename": fileMetadata.storedFileName,
           "p_original_filename": fileMetadata.originalFilename,
           "p_file_size_bytes": fileMetadata.fileSizeBytes,
           "p_mime_type": fileMetadata.mimeType,
