@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../config/app_config.dart';
 import '../../../config/app_constants.dart';
 import '../../common/models/screen_args_model.dart';
 import '../../common/services/navigation_service.dart';
@@ -67,15 +68,9 @@ class AppSidebarDrawer extends ConsumerWidget {
                       final fullName =
                           profileData['full_name']?.toString() ?? 'User';
                       final email = profileData['e_mail_id']?.toString() ?? '';
-                      final profilePic = profileData['profile_pic']?.toString();
 
-                      // Get initials from full name
-                      final nameParts = fullName.split(' ');
-                      final initials = nameParts.length > 1
-                          ? '${nameParts[0][0]}${nameParts[1][0]}'.toUpperCase()
-                          : fullName.isNotEmpty
-                          ? fullName[0].toUpperCase()
-                          : 'U';
+                      final profilePic =
+                          '${appConfig.storageUrl}/${profileData['profile_pic']?.toString()}';
 
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,21 +79,7 @@ class AppSidebarDrawer extends ConsumerWidget {
                           CircleAvatar(
                             radius: 40,
                             backgroundColor: Colors.white,
-                            backgroundImage: profilePic != null
-                                ? NetworkImage(
-                                    'https://your-api-base-url/$profilePic',
-                                  ) // Replace with actual base URL
-                                : null,
-                            child: profilePic == null
-                                ? Text(
-                                    initials,
-                                    style: const TextStyle(
-                                      fontSize: 32,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xFF4CAF50),
-                                    ),
-                                  )
-                                : null,
+                            backgroundImage: NetworkImage(profilePic),
                           ),
                           const SizedBox(height: 16),
                           // User Name
