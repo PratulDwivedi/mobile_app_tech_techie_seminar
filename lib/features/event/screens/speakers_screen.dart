@@ -1,4 +1,3 @@
-import '../../../config/app_config.dart';
 import '../../common/models/screen_args_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

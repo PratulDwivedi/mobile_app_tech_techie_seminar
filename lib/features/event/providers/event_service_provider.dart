@@ -65,6 +65,28 @@ final bannersProvider = FutureProvider<ResponseMessageModel>((ref) async {
   return await service.getBanners();
 });
 
+final cabsProvider = FutureProvider<ResponseMessageModel>((ref) async {
+  final service = ref.watch(eventServiceProvider);
+  return await service.getBookCabs();
+});
+
+final nearByPlacesProvider = FutureProvider<ResponseMessageModel>((ref) async {
+  final service = ref.watch(eventServiceProvider);
+  return await service.getNearbyPlaces();
+});
+
+final placesOfInterestsProvider = FutureProvider<ResponseMessageModel>((
+  ref,
+) async {
+  final service = ref.watch(eventServiceProvider);
+  return await service.getPlacesOfInterests();
+});
+
+final appointmentsProvider = FutureProvider<ResponseMessageModel>((ref) async {
+  final service = ref.watch(eventServiceProvider);
+  return await service.getAppointments();
+});
+
 final delegatesProvider =
     FutureProvider.family<ResponseMessageModel, DelegatesProviderParams>((
       ref,

@@ -27,6 +27,13 @@ abstract class EventService {
   Future<ResponseMessageModel> getBanners();
   Future<ResponseMessageModel> getExhibitors();
 
+  Future<ResponseMessageModel> getBookCabs();
+
+  Future<ResponseMessageModel> getNearbyPlaces();
+
+  Future<ResponseMessageModel> getPlacesOfInterests();
+  Future<ResponseMessageModel> getAppointments();
+
   Future<ResponseMessageModel> getSummaryCount();
   Future<ResponseMessageModel> getHtmlContent(int pageId);
 }

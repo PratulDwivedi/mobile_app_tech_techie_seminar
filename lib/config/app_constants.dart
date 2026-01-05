@@ -4,18 +4,19 @@ class ApiRoutes {
   static const String signIn = 'seminar.fn_signin_mobile_delegate';
   static const String profile = 'seminar.fn_get_mobile_delegate';
   static const String updatePassword = 'seminar.fn_update_delegate_password';
-  static const String updateProfilePic = 'seminar.fn_update_delegate_profile_pic';
+  static const String updateProfilePic =
+      'seminar.fn_update_delegate_profile_pic';
   static const String htmlContent = 'seminar.fn_get_mobile_html_content';
   static const String summaryCount = 'seminar.fn_get_mobile_event_counts';
-  static const String myAppointments =
-      'seminar.fn_get_mobile_my_appointments'; //
-  static const String nearbyPlaces = 'seminar.fn_get_mobile_nearby_places'; //
+  static const String myAppointments = 'seminar.fn_get_mobile_appointments';
+  static const String nearbyPlaces = 'seminar.fn_get_mobile_nearby_places';
   static const String placesOfInterest =
-      'seminar.fn_get_mobile_places_of_interest'; //
+      'seminar.fn_get_mobile_places_of_interest';
+  static const String bookCabs = 'seminar.fn_get_mobile_book_cab';
   static const String feedback = 'seminar.fn_get_mobile_feedback'; //
   static const String gallery = 'seminar.fn_get_mobile_gallery'; //
   static const String documents = 'seminar.fn_get_mobile_documents'; //
-  static const String program = 'seminar.fn_get_mobile_event_schedule'; 
+  static const String program = 'seminar.fn_get_mobile_event_schedule';
   static const String speakers = 'seminar.fn_get_mobile_speakers';
   static const String sponsors = 'seminar.fn_get_mobile_sponsors';
   static const String exhibitors = 'seminar.fn_get_mobile_exhibitors';

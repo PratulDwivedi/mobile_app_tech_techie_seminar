@@ -73,6 +73,30 @@ class SupabaseEventService implements EventService {
 
 
   @override
+  Future<ResponseMessageModel> getBookCabs() async {
+    final response = await SupabaseApiHelper.post(ApiRoutes.bookCabs, null);
+    return response;
+  }
+
+    @override
+  Future<ResponseMessageModel> getNearbyPlaces() async {
+    final response = await SupabaseApiHelper.post(ApiRoutes.nearbyPlaces, null);
+    return response;
+  }
+
+    @override
+  Future<ResponseMessageModel> getPlacesOfInterests() async {
+    final response = await SupabaseApiHelper.post(ApiRoutes.placesOfInterest, null);
+    return response;
+  }
+
+    @override
+  Future<ResponseMessageModel> getAppointments() async {
+    final response = await SupabaseApiHelper.post(ApiRoutes.myAppointments, null);
+    return response;
+  }
+
+  @override
   Future<ResponseMessageModel> getDelegatesWithFilter(
     int pageNo,
     DelegateFilter? filter,
