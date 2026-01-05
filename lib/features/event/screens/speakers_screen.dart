@@ -3,6 +3,7 @@ import '../../common/models/screen_args_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../common/widgets/common_gradient_header_widget.dart';
+import '../../common/widgets/secure_network_image.dart';
 import '../providers/event_service_provider.dart';
 import 'speaker_info_screen.dart';
 
@@ -10,11 +11,7 @@ class SpeakersScreen extends ConsumerStatefulWidget {
   final ScreenArgsModel args;
   final bool showHeader;
 
-  const SpeakersScreen({
-    required this.args,
-    this.showHeader = true,
-    super.key
-  });
+  const SpeakersScreen({required this.args, this.showHeader = true, super.key});
 
   @override
   ConsumerState<SpeakersScreen> createState() => _SpeakersScreenState();
@@ -45,50 +42,47 @@ class _SpeakersScreenState extends ConsumerState<SpeakersScreen> {
         // Speakers Content
         Expanded(
           child: speakersAsync.when(
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: (err, _) => Center(child: Text('Error: $err')),
-              data: (response) {
-                if (!response.isSuccess) {
-                  return Center(child: Text(response.message));
-                }
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (err, _) => Center(child: Text('Error: $err')),
+            data: (response) {
+              if (!response.isSuccess) {
+                return Center(child: Text(response.message));
+              }
 
-                final speakersData = (response.data as List?) ?? [];
+              final speakersData = (response.data as List?) ?? [];
 
-                if (speakersData.isEmpty) {
-                  return const Center(child: Text('No speakers available'));
-                }
+              if (speakersData.isEmpty) {
+                return const Center(child: Text('No speakers available'));
+              }
 
-                return ListView.builder(
-                  padding: const EdgeInsets.all(16.0),
-                  itemCount: speakersData.length,
-                  itemBuilder: (context, index) {
-                    final speaker = speakersData[index] as Map<String, dynamic>;
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                SpeakerInfoScreen(speaker: speaker),
-                          ),
-                        );
-                      },
-                      child: SpeakerCard(speaker: speaker),
-                    );
-                  },
-                );
-              },
-            ),
+              return ListView.builder(
+                padding: const EdgeInsets.all(16.0),
+                itemCount: speakersData.length,
+                itemBuilder: (context, index) {
+                  final speaker = speakersData[index] as Map<String, dynamic>;
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              SpeakerInfoScreen(speaker: speaker),
+                        ),
+                      );
+                    },
+                    child: SpeakerCard(speaker: speaker),
+                  );
+                },
+              );
+            },
           ),
-        ],
-      );
-    
+        ),
+      ],
+    );
 
     // Return with Scaffold if showing header (standalone screen)
     // Return just content if embedded (no scaffold)
-    return widget.showHeader
-        ? Scaffold(body: content)
-        : content;
+    return widget.showHeader ? Scaffold(body: content) : content;
   }
 }
 
@@ -124,12 +118,16 @@ class SpeakerCard extends StatelessWidget {
                 // Profile Picture
                 CircleAvatar(
                   radius: 40,
-
-                  backgroundImage: profilePic != null
-                      ? NetworkImage(
-                          '${appConfig.storageUrl}/${profilePic}',
-                        )
-                      : null,
+                  child: SecureNetworkImage(
+                    storedFilename: profilePic ?? '',
+                    width: 80,
+                    height: 80,
+                  ),
+                  // backgroundImage: profilePic != null
+                  //     ? NetworkImage(
+                  //         '${appConfig.storageUrl}/${profilePic}',
+                  //       )
+                  //     : null,
                 ),
                 const SizedBox(width: 16),
                 // Speaker Details
