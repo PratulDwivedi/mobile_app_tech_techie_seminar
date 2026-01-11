@@ -34,6 +34,8 @@ abstract class EventService {
   Future<ResponseMessageModel> getPlacesOfInterests();
   Future<ResponseMessageModel> getAppointments();
 
+  Future<ResponseMessageModel> getFeedbackParams();
+
   Future<ResponseMessageModel> getSummaryCount();
   Future<ResponseMessageModel> getHtmlContent(int pageId);
 }

@@ -87,6 +87,13 @@ final appointmentsProvider = FutureProvider<ResponseMessageModel>((ref) async {
   return await service.getAppointments();
 });
 
+final feedbackParamsProvider = FutureProvider<ResponseMessageModel>((
+  ref,
+) async {
+  final service = ref.watch(eventServiceProvider);
+  return await service.getFeedbackParams();
+});
+
 final delegatesProvider =
     FutureProvider.family<ResponseMessageModel, DelegatesProviderParams>((
       ref,

@@ -33,7 +33,7 @@ class _BookCabScreenState extends ConsumerState<BookCabScreen> {
           CommonGradientHeader(
             title: widget.args.name,
             onRefresh: () {
-              ref.invalidate(profileProvider);
+              ref.invalidate(cabsProvider);
             },
           ),
 

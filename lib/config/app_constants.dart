@@ -24,6 +24,7 @@ class ApiRoutes {
   static const String fileMetadata = 'public.fn_save_file_metadata';
   static const String uploadFile = 'functions/v1/upload-file';
   static const String banners = 'seminar.fn_get_mobile_banners';
+  static const String feedbackParams = 'seminar.fn_get_mobile_feedback_params';
 }
 
 class AppPageRoute {
@@ -48,15 +49,15 @@ class AppPageRoute {
 }
 
 class AppPageIds {
-  static const int helpLine = 54;
-  static const int fromDgDesk = 59;
-  static const int exhibition = 60;
-  static const int registration = 62;
-  static const int aboutFai = 63;
-  static const int seminarTheme = 220;
-  static const int conferenceHotel = 222;
-  static const int culturalProgramme = 237;
-  static const int faqs = 249;
+  static const int helpLine = 169;
+  static const int fromDgDesk = 141;
+  static const int exhibition = 142;
+  static const int registration = 143;
+  static const int aboutFai = 144;
+  static const int seminarTheme = 146;
+  static const int conferenceHotel = 147;
+  static const int culturalProgramme = 148;
+  static const int faqs = 149;
 }
 
 Map<String, IconData> pageIcons = {

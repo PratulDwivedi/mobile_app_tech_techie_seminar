@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "323971870247",
+    "project_id": "artificialwit-b46a2",
+    "storage_bucket": "artificialwit-b46a2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323971870247:android:a86470032db21c1cac6802",
+        "android_client_info": {
+          "package_name": "com.artificialwit.waakit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzMLRQciPV_hy5nhHZBKZVjzBdjNvQchU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323971870247:android:ce4abe90c11ba4e0ac6802",
+        "android_client_info": {
+          "package_name": "org.faidelhi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzMLRQciPV_hy5nhHZBKZVjzBdjNvQchU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

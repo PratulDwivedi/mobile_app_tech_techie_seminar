@@ -7,19 +7,25 @@ import 'event_service.dart';
 class SupabaseEventService implements EventService {
   @override
   Future<ResponseMessageModel> getProgramDateWise() async {
-    final response = await SupabaseApiHelper.post(ApiRoutes.program, {"p_type" : "Dates"});
+    final response = await SupabaseApiHelper.post(ApiRoutes.program, {
+      "p_type": "Dates",
+    });
     return response;
   }
 
   @override
   Future<ResponseMessageModel> getProgramSessionWise() async {
-    final response = await SupabaseApiHelper.post(ApiRoutes.program,  {"p_type" : "Sessions"});
+    final response = await SupabaseApiHelper.post(ApiRoutes.program, {
+      "p_type": "Sessions",
+    });
     return response;
   }
 
   @override
   Future<ResponseMessageModel> getProgramSpeakerWise() async {
-    final response = await SupabaseApiHelper.post(ApiRoutes.program, {"p_type" : "Speakers"});
+    final response = await SupabaseApiHelper.post(ApiRoutes.program, {
+      "p_type": "Speakers",
+    });
     return response;
   }
 
@@ -64,13 +70,11 @@ class SupabaseEventService implements EventService {
     return response;
   }
 
-
   @override
   Future<ResponseMessageModel> getBanners() async {
     final response = await SupabaseApiHelper.post(ApiRoutes.banners, null);
     return response;
   }
-
 
   @override
   Future<ResponseMessageModel> getBookCabs() async {
@@ -78,21 +82,36 @@ class SupabaseEventService implements EventService {
     return response;
   }
 
-    @override
+  @override
   Future<ResponseMessageModel> getNearbyPlaces() async {
     final response = await SupabaseApiHelper.post(ApiRoutes.nearbyPlaces, null);
     return response;
   }
 
-    @override
+  @override
   Future<ResponseMessageModel> getPlacesOfInterests() async {
-    final response = await SupabaseApiHelper.post(ApiRoutes.placesOfInterest, null);
+    final response = await SupabaseApiHelper.post(
+      ApiRoutes.placesOfInterest,
+      null,
+    );
     return response;
   }
 
-    @override
+  @override
   Future<ResponseMessageModel> getAppointments() async {
-    final response = await SupabaseApiHelper.post(ApiRoutes.myAppointments, null);
+    final response = await SupabaseApiHelper.post(
+      ApiRoutes.myAppointments,
+      null,
+    );
+    return response;
+  }
+
+  @override
+  Future<ResponseMessageModel> getFeedbackParams() async {
+    final response = await SupabaseApiHelper.post(
+      ApiRoutes.feedbackParams,
+      null,
+    );
     return response;
   }
 

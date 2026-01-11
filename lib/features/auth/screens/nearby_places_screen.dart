@@ -2,7 +2,7 @@ import '../../common/models/screen_args_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../common/widgets/common_gradient_header_widget.dart';
-import '../providers/auth_service_provider.dart';
+import '../../event/providers/event_service_provider.dart';
 
 class NearbyPlacesScreen extends ConsumerStatefulWidget {
   final ScreenArgsModel args;
@@ -21,7 +21,7 @@ class _NearbyPlacesScreenState extends ConsumerState<NearbyPlacesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final profileAsync = ref.watch(profileProvider);
+    final nearByPlacesAsync = ref.watch(nearByPlacesProvider);
     return Scaffold(
       body: Column(
         children: [
@@ -29,13 +29,13 @@ class _NearbyPlacesScreenState extends ConsumerState<NearbyPlacesScreen> {
           CommonGradientHeader(
             title: widget.args.name,
             onRefresh: () {
-              ref.invalidate(profileProvider);
+              ref.invalidate(nearByPlacesProvider);
             },
           ),
 
           // Profile Content
           Expanded(
-            child: profileAsync.when(
+            child: nearByPlacesAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (err, _) => Center(child: Text('Error: $err')),
               data: (response) {
